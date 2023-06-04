@@ -124,6 +124,7 @@
     font-size: 15px;
 }
 .footer-site{
+    margin-top: 50%;
     display: flex;
     background-color: #A87B24 ;
     width: 100%;

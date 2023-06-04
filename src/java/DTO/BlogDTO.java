@@ -1,35 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
-import java.util.Date;
+import java.io.Serializable;
 
-/**
- *
- * @author PC
- */
-public class BlogDTO {
+public class BlogDTO implements Serializable {
+
     private int blogID;
-    private int account;
-    private String body;
-    private String title;
-    private String media;
-    private Date createTime;
-    private String image;
+    private int accountID;
+    private String Body;
+    private String Title;
+    private String Media;
+    private String createTime;
 
     public BlogDTO() {
     }
 
-    public BlogDTO(int blogID, int account, String body, String title, String media, Date createTime, String image) {
+    public BlogDTO(int blogID, int accountID, String Body, String Title, String Media, String createTime) {
         this.blogID = blogID;
-        this.account = account;
-        this.body = body;
-        this.title = title;
-        this.media = media;
+        this.accountID = accountID;
+        this.Body = Body;
+        this.Title = Title;
+        this.Media = Media;
         this.createTime = createTime;
-        this.image = image;
     }
 
     public int getBlogID() {
@@ -40,53 +31,49 @@ public class BlogDTO {
         this.blogID = blogID;
     }
 
-    public int getAccount() {
-        return account;
+    public int getAccountID() {
+        return accountID;
     }
 
-    public void setAccount(int account) {
-        this.account = account;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public String getBody() {
-        return body;
+        return Body;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setBody(String Body) {
+        this.Body = Body;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String Title) {
+        this.Title = Title;
     }
 
     public String getMedia() {
-        return media;
+        return Media;
     }
 
-    public void setMedia(String media) {
-        this.media = media;
+    public void setMedia(String Media) {
+        this.Media = Media;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public String getImage() {
-        return image;
+    @Override
+    public String toString() {
+        return "BlogDTO{" + "blogID=" + blogID + ", accountID=" + accountID + ", Body=" + Body + ", Title=" + Title + ", Media=" + Media + ", createTime=" + createTime + '}';
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-    
-    
 }

@@ -75,7 +75,7 @@
                                                 <ul class="submenu">
                                                     <li>      
                                                         <a class="nav-link" href="MainController?action=HOME_USER">HOME</a>
-                                                        <a class="nav-link" href="MainController?action=MANAGE_BLOG">BLOG</a>
+                                                        <a class="nav-link" href="MainController?action=MANAGE_BLOG">Manage BLOG</a>
                                                         <a class="nav-link" href="MainController?action=MANAGE_ACCOUNT">Manage Account</a>
                                                     </li> 
                                                 </ul>

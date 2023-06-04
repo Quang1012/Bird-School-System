@@ -1,7 +1,7 @@
 package Controller;
 
-import blog.BlogDAO;
-import blog.BlogDTO;
+import DAO.BlogDAO;
+import DTO.BlogDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

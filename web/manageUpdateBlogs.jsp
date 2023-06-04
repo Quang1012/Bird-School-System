@@ -14,7 +14,7 @@
     </head>
     <body>
         <header>
-            <%@include file="adminHeader.jsp" %>
+            <%@include file="headeradmin.jsp" %>
         </header>
         <div class="add-blog-admin-main-site container">
             <div class="add-blog-form">

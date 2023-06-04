@@ -1,5 +1,6 @@
-package blog;
+package DAO;
 
+import DTO.BlogDTO;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,29 +12,38 @@ import utils.DBContext;
 
 public class BlogDAO implements Serializable {
 
-    private final static String VIEW_BLOG = "SELECT TOP 3 *\n"
-            + "FROM (\n"
-            + "SELECT b.blogID, b.accountID, b.Body, b.Title, b.Media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
-            + "FROM Blog b\n"
-            + "WHERE createTime >= CURRENT_TIMESTAMP \n"
-            + "     ) AS subquery\n"
-            + "ORDER BY subquery.createTime ASC";
-    private final static String LIST_BLOG = "SELECT b.blogID, b.accountID, b.Body, b.Title, b.Media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
-            + "FROM Blog b";
-    private final static String BLOG_DETAIL = "SELECT b.blogID, b.accountID, b.Body, b.Title, b.Media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
-            + "FROM Blog  b\n"
+//    private final static String VIEW_BLOG = "SELECT TOP 3 *\n"
+//            + "FROM (\n"
+//            + "SELECT b.blogID, b.account, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
+//            + "FROM dbo.tblBlog b\n"
+//            + "WHERE createTime >= CURRENT_TIMESTAMP \n"
+//            + "     ) AS subquery\n"
+//            + "ORDER BY subquery.createTime ASC";
+    private final static String VIEW_BLOG = "SELECT TOP 3 * " +
+    "FROM ( " +
+    "SELECT b.blogID, b.account, b.body, b.title, b.media, " +
+    "CONVERT(varchar, b.createTime, 103) + ' ' + CONVERT(varchar, b.createTime, 108) AS createTime " +
+    "FROM dbo.tblBlog b " +
+    "WHERE b.createTime >= GETDATE() " +
+    ") AS subquery " +
+    "ORDER BY subquery.createTime ASC";
+    private final static String LIST_BLOG = "SELECT b.blogID, b.account, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
+            + "FROM dbo.tblBlog b";
+    private final static String BLOG_DETAIL = "SELECT b.blogID, b.account, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
+            + "FROM dbo.tblBlog b\n"
             + "WHERE b.blogID = ?";
-    private final static String ANOTHER_DETAIL = "SELECT b.blogID, b.accountID, b.Body, b.Title, b.Media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
-            + "FROM Blog b\n"
-            + "WHERE blogID NOT IN (SELECT blogID FROM Blog WHERE blogID = ?);";
-    private final static String DELETE_BLOG = "DELETE FROM Blog  \n"
+    private final static String ANOTHER_DETAIL = "SELECT b.blogID, b.account, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
+            + "FROM dbo.tblBlog b\n"
+            + "WHERE blogID NOT IN (SELECT blogID FROM dbo.tblBlog WHERE blogID = ?);";
+    private final static String DELETE_BLOG = "DELETE FROM dbo.tblBlog  \n"
             + "WHERE blogID = ? ";
-    private final static String ADD_BLOG = "INSERT INTO BLOG([accountID],[Body],[Title],[Media],[createTime])\n"
+    private final static String ADD_BLOG = "INSERT INTO dbo.tblBlog[account],[body],[title],[media],[createTime])\n"
             + "VALUES(?,?,?,?,GETDATE());";
-    private final static String UPDATE_BLOG = "UPDATE Blog\n"
-            + "SET Body = ?, Title =?, Media =?, createTime = GETDATE()\n"
+    private final static String UPDATE_BLOG = "UPDATE dbo.tblBlog\n"
+            + "SET body = ?, title =?, media =?, createTime = GETDATE()\n"
             + "WHERE blogID = ?";
-    private final static String DASHBOARD_BLOG = "SELECT COUNT(blogID) as blogID FROM Blog";
+    private final static String DASHBOARD_BLOG = "SELECT COUNT(blogID) as blogID FROM dbo.tblBlog";
+    private final static String GET_LIST_USER_BLOG = "select * from dbo.tblBlog where account = ?";
 
     public static int updateBlog(String Body, String Title, String Media, int blogID) throws SQLException {
         Connection con = null;
@@ -129,7 +139,7 @@ public class BlogDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int nblogID = rs.getInt("blogID");
-                    int accountID = rs.getInt("accountID");
+                    int accountID = rs.getInt("account");
                     String Body = rs.getString("Body");
                     String Title = rs.getString("Title");
                     String Media = rs.getString("Media");
@@ -203,10 +213,10 @@ public class BlogDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int blogID = rs.getInt("blogID");
-                    int accountID = rs.getInt("accountID");
-                    String Body = rs.getString("Body");
-                    String Title = rs.getString("Title");
-                    String Media = rs.getString("Media");
+                    int accountID = rs.getInt("account");
+                    String Body = rs.getString("body");
+                    String Title = rs.getString("title");
+                    String Media = rs.getString("media");
                     String createTime = rs.getString("createTime");
                     BlogDTO blog = new BlogDTO(blogID, accountID, Body, Title, Media, createTime);
                     list.add(blog);
@@ -240,10 +250,10 @@ public class BlogDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int blogID = rs.getInt("blogID");
-                    int accountID = rs.getInt("accountID");
-                    String Body = rs.getString("Body");
-                    String Title = rs.getString("Title");
-                    String Media = rs.getString("Media");
+                    int accountID = rs.getInt("account");
+                    String Body = rs.getString("body");
+                    String Title = rs.getString("title");
+                    String Media = rs.getString("media");
                     String createTime = rs.getString("createTime");
                     BlogDTO blog = new BlogDTO(blogID, accountID, Body, Title, Media, createTime);
                     list.add(blog);
@@ -293,5 +303,35 @@ public class BlogDAO implements Serializable {
             }
         }
         return count;
+    }
+    
+    public List<BlogDTO> getListUserBlog(int userID){
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<BlogDTO> blogList = new ArrayList<>();
+        try {
+            con = DBContext.getConnection();
+            if(con != null){
+                stm = con.prepareStatement(GET_LIST_USER_BLOG);
+                stm.setInt(1, userID);
+                rs = stm.executeQuery();
+                if(rs != null){
+                    while(rs.next()){
+                        int blogID = rs.getInt("blogID");
+                        int accountID = rs.getInt("account");
+                        String body = rs.getString("body");
+                        String title = rs.getString("title");
+                        String media = rs.getString("media");
+                        String createTime = rs.getString("createTime");
+                        BlogDTO blog = new BlogDTO(blogID, accountID, body, title, media, createTime);
+                        blogList.add(blog);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blogList;
     }
 }

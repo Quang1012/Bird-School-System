@@ -62,7 +62,7 @@
                             <div class="col-xl-4 col-lg-4">
                                 <div class="logo">
                                     <a href="index.html">
-                                        <img src="img/logo.png" alt="">
+                                        <img src="img/logo.png" alt="" style="width: 200px; height: 200px;">
                                     </a>
                                 </div>
                             </div>
@@ -75,13 +75,14 @@
                                                 <ul class="submenu">
                                                     <li>    
                                                         <a class="nav-link" href="MainController?action=HOME_USER">HOME</a>
+                                                        <a class="nav-link" href="MainController?action=USER_BLOG&userID=${sessionScope.acc.accountID}">My BLOG</a>
+                                                        <a class="nav-link" href="MainController?action=BLOG">BLOGS</a>
                                                         
-                                                        <a class="nav-link" href="MainController?action=BLOG">BLOG</a>
                                                         
                                                     </li> 
                                                 </ul>
-
-                                            <li><a href="MainController?action=MANAGE_ACCOUNT">ACCOUNT </a>
+<!--
+-->                                            <li><a href="MainController?action=MANAGE_ACCOUNT">ACCOUNT </a>
 
                                                 <ul class="submenu">
                                                     <li>            

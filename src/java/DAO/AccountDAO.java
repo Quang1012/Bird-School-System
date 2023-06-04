@@ -15,16 +15,18 @@ public class AccountDAO implements Serializable {
     private static final String GET_ALL = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM dbo.tblAccount WHERE role != 2";
     private static final String REGISTER = "INSERT INTO Account(email, password, name, profilePhoto, role, phone, accountStatus) VALUES(?,?,?,?,?,?,?)";
     private static final String LOGIN = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM dbo.tblAccount WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS AND password = ? ";
-    private static final String CHECK_DUPLICATE = "SELECT email FROM ACCOUNT WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS";
+    private static final String CHECK_DUPLICATE = "SELECT email FROM dbo.tblAccount WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS";
     private static final String UPDATE_ACCOUNT = "UPDATE dbo.tblAccount SET name= ? , email = ? ,password = ?, phone = ? WHERE accountID = ? ";
     private static final String DELETE_ACCOUNT = "DELETE FROM dbo.tblAccount WHERE accountID = ?";
     private static final String GET_ALL_BY_ID = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM Account WHERE accountID = ? ";
     private static final String UPDATE_ACCOUNT_NEW = "UPDATE Account SET email= ?, password = ?, name = ?, phone = ?  WHERE accountID = ? ";
     private static final String DASHBOARD = "SELECT COUNT(AccountID) as AccountID\n"
             + "FROM dbo.tblAccount";
-    private static final String FIND_ACCOUNT_BY_OPTION ="SELECT accountID,name ,email,password,phone FROM dbo.tblAccount\n";
+    private static final String CHECK_ACCOUNT_BY_EMAIL = "SELECT accountID,email,password,phone FROM dbo.tblAccount WHERE email = ?";
+    private static final String FIND_ACCOUNT_BY_OPTION = "SELECT * FROM dbo.tblAccount\n";
     private static final String RESET_ACCOUNT_PASSWORD = "UPDATE Account SET password = ? WHERE accountID = ?";
-    
+    private static final String BAN_ACCOUNT = "UPDATE dbo.tblAccount SET accountStatus = ? WHERE accountID = ?";
+
     public int countAccount() throws Exception {
         Connection con = null;
         PreparedStatement stm = null;
@@ -54,34 +56,35 @@ public class AccountDAO implements Serializable {
         }
         return count;
     }
-    
-    public static ArrayList<AccountDTO> findAccByOption(String txtSearch, String searchBy){
+
+    public static ArrayList<AccountDTO> findAccByOption(String txtSearch, String searchBy) {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         ArrayList<AccountDTO> list = new ArrayList<>();
         try {
-            con =DBContext.getConnection();
-            if(con != null){
+            con = DBContext.getConnection();
+            if (con != null) {
                 String sql = FIND_ACCOUNT_BY_OPTION;
-                if(searchBy.equalsIgnoreCase("byName")){
+                if (searchBy.equalsIgnoreCase("byName")) {
                     sql = sql + "where name like ?";
-                }else if(searchBy.equalsIgnoreCase("byEmail")){
+                } else if (searchBy.equalsIgnoreCase("byEmail")) {
                     sql = sql + "where email like ?";
-                }else{
+                } else {
                     sql = sql + "where phone like ?";
                 }
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "%" + txtSearch+ "%");
+                stm.setString(1, "%" + txtSearch + "%");
                 rs = stm.executeQuery();
-                if(rs != null){
-                    while(rs.next()){
+                if (rs != null) {
+                    while (rs.next()) {
                         int accountID = rs.getInt("accountID");
                         String name = rs.getString("name");
                         String email = rs.getString("email");
                         String password = rs.getString("password");
                         String phone = rs.getString("phone");
-                        AccountDTO acc = new AccountDTO(accountID, name, email, password, phone);
+                        int accountStatus = rs.getInt("accountStatus");
+                        AccountDTO acc = new AccountDTO(accountID, name, email, password, phone,accountStatus);
                         list.add(acc);
                     }
                 }
@@ -168,6 +171,42 @@ public class AccountDAO implements Serializable {
             }
         }
         return list;
+    }
+
+    public AccountDTO checkAccountByEmail(String email) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        AccountDTO acc = null;
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement(CHECK_ACCOUNT_BY_EMAIL);
+                stm.setString(1, email);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    int accountID = rs.getInt("accountID");
+                    String nemail = rs.getString("email");
+                    String password = rs.getString("password");
+                    String phone = rs.getString("phone");
+                    acc = new AccountDTO(accountID, nemail, password, phone);
+                    return acc;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 
     public AccountDTO checkLogin(String email, String password) throws SQLException, ClassNotFoundException {
@@ -352,7 +391,7 @@ public class AccountDAO implements Serializable {
         }
         return result;
     }
-  
+
 //    public static boolean updateAccountPassword( String password,int id) throws SQLException {
 //        Connection con = null;
 //        PreparedStatement stm = null;
@@ -377,7 +416,7 @@ public class AccountDAO implements Serializable {
 //        }
 //        return result;
 //    }
-     public boolean updateAccountPassword( String password,int id) throws SQLException {
+    public boolean updateAccountPassword(String password, int id) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean check = false;
@@ -399,6 +438,24 @@ public class AccountDAO implements Serializable {
             if (con != null) {
                 con.close();
             }
+        }
+        return check;
+    }
+
+    public boolean banAccount(int id, int status) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean check = false;
+        try {
+            con = DBContext.getConnection();
+            if(con != null){
+                stm = con.prepareStatement(BAN_ACCOUNT);
+                stm.setInt(1, status);
+                stm.setInt(2, id);
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return check;
     }

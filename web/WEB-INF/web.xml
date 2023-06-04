@@ -8,6 +8,14 @@
         <servlet-name>DeleteAccountController</servlet-name>
         <servlet-class>Controller.DeleteAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadMyBlogController</servlet-name>
+        <servlet-class>Controller.LoadMyBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BanAccountController</servlet-name>
+        <servlet-class>Controller.BanAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>DeleteAccountController</servlet-name>
         <url-pattern>/DeleteAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadMyBlogController</servlet-name>
+        <url-pattern>/LoadMyBlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BanAccountController</servlet-name>
+        <url-pattern>/BanAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

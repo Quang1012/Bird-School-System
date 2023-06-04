@@ -1,7 +1,8 @@
 package Controller;
 
-import blog.BlogDAO;
-import blog.BlogDTO;
+import static Controller.UpdateAccountController.url;
+import DAO.BlogDAO;
+import DTO.BlogDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,13 +20,18 @@ public class LoadUpdateBlogsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String url = SUCCESS;
+            String url = "";
             BlogDAO b = new BlogDAO();
             try {
-                int blogID = Integer.valueOf(request.getParameter("blogID"));
+                int blogID = Integer.parseInt(request.getParameter("blogID"));
                 BlogDTO updateBlog = b.getBlogbyID(blogID);
-                request.setAttribute("updateblog", updateBlog);
-                out.print(updateBlog);
+                if(updateBlog != null){
+                    request.setAttribute("updateblog", updateBlog);
+                    out.print(updateBlog);
+                    url = SUCCESS;
+                }else{
+                    url = ERROR;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

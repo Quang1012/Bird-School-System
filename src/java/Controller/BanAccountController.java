@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import DAO.BlogDAO;
+import DAO.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,32 +13,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "AddBlogsController", urlPatterns = {"/AddBlogsController"})
-public class AddBlogsController extends HttpServlet {
-
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "LoadBlogControllerManageController";
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/**
+ *
+ * @author PC
+ */
+@WebServlet(name = "BanAccountController", urlPatterns = {"/BanAccountController"})
+public class BanAccountController extends HttpServlet {
+    private static final String FAIL = "error.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String url = null;
-            BlogDAO b = new BlogDAO();
-            try {
-                int accountID = Integer.valueOf(request.getParameter("accountID"));
-                String Body = request.getParameter("Body");
-                String Title = request.getParameter("Title");
-                String Media = request.getParameter("Media");
-                int addBlog = b.addBlog(accountID, Body, Title, "image/" + Media);
-                if (addBlog != 0) {
-                    url = SUCCESS;
-                } else {
-                    url = ERROR;
+            int Id = Integer.parseInt(request.getParameter("Id"));
+            int status = Integer.parseInt(request.getParameter("accountStatus"));
+            String lastSearchValue = request.getParameter("lastSearchValue");
+            String searchByValue = request.getParameter("searchByValue");
+            AccountDAO accDao = new AccountDAO();
+            String url = "";
+            boolean check;
+            if(status == 1){
+                check = accDao.banAccount(Id, 0);
+                if(check){
+                    url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                }else{
+                    url= FAIL;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            }else{
+                check = accDao.banAccount(Id, 1);
+                if(check){
+                    url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                }else{
+                    url= FAIL;
+                }
             }
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
         }
     }
 

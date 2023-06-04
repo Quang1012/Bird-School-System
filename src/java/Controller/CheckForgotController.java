@@ -1,37 +1,53 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controller;
 
-import DAO.BlogDAO;
+import DAO.AccountDAO;
+import DTO.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DeleteBlogsController", urlPatterns = {"/DeleteBlogsController"})
-public class DeleteBlogsController extends HttpServlet {
+/**
+ *
+ * @author Admin
+ */
+@WebServlet(name = "checkForgotController", urlPatterns = {"/checkForgotController"})
+public class CheckForgotController extends HttpServlet {
 
-    private static final String SUCCESS = "LoadBlogControllerManageController";
     private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "resetPasswordForm.jsp";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String url = null;
-            BlogDAO b = new BlogDAO();
+            String url = ERROR;
             try {
-                int blogID = Integer.valueOf(request.getParameter("blogID"));
-                boolean check = b.deleteBlog(blogID);
-                if (check == true) {
-                    url = SUCCESS;
-                } else {
+                String error = "Can not find your email. Please check it again";
+                String forgorInput = request.getParameter("phoneoremail");
+                AccountDAO account = new AccountDAO();
+                AccountDTO accountdto = account.checkAccountByEmail(forgorInput);
+                if (accountdto != null) {
+                    request.setAttribute("accountdto", accountdto);
+                    url = SUCCESS;  
+                }else{
+                    request.setAttribute("error", error);
                     url = ERROR;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             request.getRequestDispatcher(url).forward(request, response);
+       
         }
     }
 

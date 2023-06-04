@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="CSS/cssss/style.css">
         <link rel="stylesheet" href="CSS/adminHeader.css.css">
         <link rel="stylesheet" href="CSS/adminHeader.css.css">
+        <link rel="stylesheet" href="CSS/login.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -74,16 +75,12 @@
                                             <li><a href="#">Menu </a>
                                                 <ul class="submenu">
                                                     <li>    
-                                                        <a class="nav-link" href="MainController?action=HOME_USER">HOME</a>
-                                                       
+                                                        <a class="nav-link" href="MainController?action=HOME_USER">HOME</a>                                                       
                                                         <a class="nav-link" href="MainController?action=BLOG">BLOG</a>
-                                                      
+                                                        <a class="nav-link" href="MainController?action=ABOUT_US">ABOUT US</a>
                                                     </li> 
                                                 </ul>
-
-                                            <li>   <p><a href="login.jsp">Login</a>
-
-
+                                            <li>   <p><a href="#" id="button">Login</a>
                                         </ul>
                                     </nav>
                                 </div>
@@ -93,7 +90,53 @@
                 </div>
             </div>
         </header>
-
-
+        <div class="login-container">
+            <div class="login-body-container">
+                <span id="close" onclick="closeLoginPopup()"><img class="close-img" src="image/closeButton.png" alt="icon"/></span>
+                <div class="login-form d-flex justify-content-between">
+                    <div class="login-left-site">
+                        <div class="left-content">
+                            <div class="left-content-heading">
+                                <b>Welcome To</b><br>
+                                <b>The Bird FLY TRAINING </b>
+                                <span style="font-size: 25px;">Now here?</span>
+                            </div>                              
+                        </div>
+                        <div class="btn-left">
+                            <form action="MainController"  method="POST">
+                                <button type="submit" name="action" value="Register" class="btn left-btn">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="login-right-site">
+                        <div class="login-right-site-body">
+                            <div class="login-right-heading">
+                                <b>SIGN IN</b>
+                            </div>
+                            <div class="login-register">
+                                <!-- Login Form -->
+                                <form action="MainController" method="post">
+                                    <p class="text-danger">${requestScope.mess}</p>
+                                    <input type="email" name="email" value="" class="form-control" placeholder="Enter email"required="" >
+                                    <input type="password" name="password" value="" class="form-control" placeholder="Password"required="" >
+                                    <a href="forgotPassword.jsp">Forgot Password</a>
+                                    <button type="submit" name="action" value="Login"  class="btn btn-login">Sign in</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            
+            document.getElementById("button").addEventListener("click",function(){
+               document.querySelector(".login-container").style.display = "flex";
+            });
+            
+            document.getElementById("close").addEventListener("click",function(){
+               document.querySelector(".login-container").style.display = "none";
+            });
+        </script>
     </body>
 </html>

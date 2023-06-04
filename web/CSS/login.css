@@ -3,14 +3,16 @@ body,html {
     margin: 0%;
 }
 .login-container{
-    background-image: linear-gradient( 120deg, #FEE9E1,#AA7B20);
+    background: rgba(0,0,0,0.33);
     height: 100%;
     width: 100%;
-    background-position: center;
-    background-repeat: no-repeat ;
-    background-size: cover;
+    top: 0%;
+    z-index: 1;
+    display: none;
+    justify-content: center;
     align-items: center;
     position: absolute;
+    overflow: auto;
 }
 .login-body-container{
     max-width: 1000px;
@@ -19,6 +21,7 @@ body,html {
     align-items: center;
     margin:  100px auto;
     border-radius: 20px;
+    position: relative;
 }
 .login-form{
     height: inherit;
@@ -161,4 +164,14 @@ body,html {
     bottom: -12 px;
     left: 5px;
     color: #e74c3c;
+}
+.close-img{
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 42px;
+    height: 42px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }

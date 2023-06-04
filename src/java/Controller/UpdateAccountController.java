@@ -39,7 +39,8 @@ public class UpdateAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int id = Integer.parseInt(request.getParameter("Id"));
+            String nn = request.getParameter("userId");
+            int id = Integer.parseInt(nn);
             String newName = request.getParameter("newName");
             String newEmail = request.getParameter("newEmail");
             String newPassword = request.getParameter("newPassword");
