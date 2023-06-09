@@ -80,7 +80,7 @@
                                                     </li> 
                                                 </ul>
 
-                                            <li><a href="MainController?action=MANAGE_ACCOUNT">ACCOUNT </a>
+                                            <li><a href="#">ACCOUNT </a>
 
                                                 <ul class="submenu">
                                                     <li>          <a class="nav-link" href="MainController?action=ProfileLoad"><i class="fa-solid fa-gear"></i>     Account Setting</a> 

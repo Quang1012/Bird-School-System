@@ -17,7 +17,9 @@ public class AccountDAO implements Serializable {
     private static final String LOGIN = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM dbo.tblAccount WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS AND password = ? ";
     private static final String CHECK_DUPLICATE = "SELECT email FROM dbo.tblAccount WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS";
     private static final String UPDATE_ACCOUNT = "UPDATE dbo.tblAccount SET name= ? , email = ? ,password = ?, phone = ? WHERE accountID = ? ";
-    private static final String DELETE_ACCOUNT = "DELETE FROM dbo.tblAccount WHERE accountID = ?";
+    private static final String DELETE_ACCOUNT = "ALTER TABLE dbo.tblBlog\n"
+            + "DROP CONSTRAINT account;"
+            + "DELETE FROM dbo.tblAccount WHERE accountID = ?";
     private static final String GET_ALL_BY_ID = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM Account WHERE accountID = ? ";
     private static final String UPDATE_ACCOUNT_NEW = "UPDATE Account SET email= ?, password = ?, name = ?, phone = ?  WHERE accountID = ? ";
     private static final String DASHBOARD = "SELECT COUNT(AccountID) as AccountID\n"
@@ -84,7 +86,7 @@ public class AccountDAO implements Serializable {
                         String password = rs.getString("password");
                         String phone = rs.getString("phone");
                         int accountStatus = rs.getInt("accountStatus");
-                        AccountDTO acc = new AccountDTO(accountID, name, email, password, phone,accountStatus);
+                        AccountDTO acc = new AccountDTO(accountID, name, email, password, phone, accountStatus);
                         list.add(acc);
                     }
                 }
@@ -448,7 +450,7 @@ public class AccountDAO implements Serializable {
         boolean check = false;
         try {
             con = DBContext.getConnection();
-            if(con != null){
+            if (con != null) {
                 stm = con.prepareStatement(BAN_ACCOUNT);
                 stm.setInt(1, status);
                 stm.setInt(2, id);

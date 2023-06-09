@@ -33,7 +33,7 @@ public class BanAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int Id = Integer.parseInt(request.getParameter("Id"));
+            int Id = Integer.parseInt(request.getParameter("userId"));
             int status = Integer.parseInt(request.getParameter("accountStatus"));
             String lastSearchValue = request.getParameter("lastSearchValue");
             String searchByValue = request.getParameter("searchByValue");
@@ -50,7 +50,11 @@ public class BanAccountController extends HttpServlet {
             }else{
                 check = accDao.banAccount(Id, 1);
                 if(check){
-                    url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                    if(!lastSearchValue.trim().isEmpty() && !lastSearchValue.trim().isBlank() && !searchByValue.trim().isEmpty() && !searchByValue.trim().isBlank()){
+                        url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                    }else{
+                        url = "MainController?action=LISTALLACCOUNT";
+                    }
                 }else{
                     url= FAIL;
                 }

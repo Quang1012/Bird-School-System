@@ -20,3 +20,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
     justify-content: center;
 }
+.edit-container{
+    background: rgba(0,0,0,0.33);
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    z-index: 1;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    overflow: auto;
+}
+.edit-body-container{
+    max-width: 1000px;
+    height: 700px;
+    background-color: #FEE9E1;
+    align-items: center;
+    margin:  100px auto;
+    border-radius: 20px;
+}
+
+.edit-form{
+    height: inherit;
+    align-items: center;
+}
+.edit-inside{
+    width: auto;
+    margin: 0 40px;
+}
+
+.edit-right-heading{
+    display: flex ;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    color: #D8B763;
+}
+.edit-right-site-body{
+    margin-top: 50px;
+}

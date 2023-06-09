@@ -29,10 +29,10 @@ public class LoadHomePageController extends HttpServlet {
             BlogDAO blog = new BlogDAO();
             try {
                
-                List<BlogDTO> bl = blog.viewBlog();
+                List<BlogDTO> bl = blog.listAnotherBlog(0);
                 if (bl != null) {
                    
-                    s.setAttribute("GET_BLOG", bl);
+                    s.setAttribute("VIEW_BLOG", bl);
                     url = SUCCESS;
                 } else {
                     url = ERROR;

@@ -38,7 +38,7 @@ public class DeleteAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int id = Integer.parseInt(request.getParameter("Id"));
+            int id = Integer.parseInt(request.getParameter("userId"));
             String lastSearchValue = request.getParameter("lastSearchValue");
             String searchByValue = request.getParameter("searchByValue");
             AccountDAO accDao = new AccountDAO();

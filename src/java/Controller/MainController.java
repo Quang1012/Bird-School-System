@@ -134,7 +134,7 @@ public class MainController extends HttpServlet {
                         url = HOME_PAGE;
                         break;
                     case MANAGE_ACCOUNT:
-                        url = MANAGE_ACCOUNT_PAGE;
+                        url = COUNT_ACCOUNT_CONTROLLER;
                         break;
                     case SEARCH_ACCOUNT:
                         url = MANAGE_ACCOUNT_PAGE;
