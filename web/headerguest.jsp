@@ -28,10 +28,7 @@
         <link href="CSS/gijgo.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/animate.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/slicknav.css" rel="stylesheet" type="text/css"/>
-        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Baloo' rel='stylesheet'>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="CSS/style_1.css" rel="stylesheet" type="text/css"/>
     </head>
 
     <body>
@@ -85,7 +82,7 @@
                                             <li><a href="MainController?action=BLOG">BLOG</a></li>
                                             <li><a  href="MainController?action=Course">Course</a> <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">blog</a></li>
+                                                    <li><a href="blog.html">Course</a></li>
                                                     <li><a href="single-blog.html">Course online</a></li>
                                                 </ul>
                                             </li>
@@ -103,7 +100,8 @@
                     </div>
                 </div>
             </div>
-            <div class="login-container">
+        </header>
+        <div class="login-container">
                 <div class="login-body-container">
                     <span id="close" class="close_button"><img class="close-img" src="image/closeButton.png" alt="icon"/></span>
                     <div class="login-form d-flex justify-content-between">
@@ -141,7 +139,6 @@
                     </div>
                 </div>
             </div>
-        </header>
         <script>
 
             document.getElementById("button").addEventListener("click", function () {

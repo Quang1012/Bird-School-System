@@ -4,11 +4,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <link href="CSS/blogManagement.css" rel="stylesheet">
+        <link href="CSS/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/magnific-popup.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/themify-icons.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/nice-select.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/flaticon.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/gijgo.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/slicknav.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/style_1.css" rel="stylesheet" type="text/css"/>
         <title>Manage Blogs</title>
     </head>
     <body>
@@ -16,32 +22,38 @@
         <header>
             <%@include file="headeradmin.jsp" %>
         </header>
-        <div class="blog-admin-site-page container">
-            <div class="blog-admin-site-categories w-100">
-                <div class="blogs-add-button d-flex">
-                    <a href="manageAddBlogs.jsp" style="color: white">Add New Blog</a>
-                </div>
-                <div class="one-blog-admin-site-categories">
+        <div> <a href="manageAddBlogs.jsp" class="boxed-btn3" >Add New Blog</a></div>
+        <div class="testmonial_area">
+            <div class="container">
+                <div class="row justify-content-center">
+
                     <c:forEach var="a" items="${sessionScope.LIST_BLOG}">
-                        <div class="card-blog">
-                            <img class="card-img-top" src="${a.getMedia()}" alt="Card image cap">
-                            <div class="card-body">
-                                <div class="id-blog-site">#${a.getBlogID()}</div>
-                                <p style="font-size: 15px;">${a.getCreateTime()}</p>
-                                <h5 class="card-title">${a.getTitle()}</h5>
-                                <p class="card-blog-body">${a.getBody()}</p>
-                                <div class="blogs-card-button">
-                                    <a href="MainController?action=UPDATE_BLOGS&blogID=${a.getBlogID()}">Update</a>
-                                    <a href="MainController?action=DELETE_BLOGS&blogID=${a.getBlogID()}" style="color: white">Delete</a>
+                        <div class="col-lg-10">
+                            <div class="testmonial_wrap">
+                                <div class="single_testmonial d-flex align-items-center">
+                                    <div class="test_thumb">
+                                        <img src="${a.getMedia()}" alt="Card image cap">
+                                    </div>
+
+                                    <div class="test_content">
+                                        <h4>${a.getTitle()}</h4>
+                                        <span>${a.getCreateTime()}</span>
+                                        <p>#${a.getBlogID()}</p>
+                                        <p>${a.getBody()}</p>
+                                        <a class="boxed-btn3"  href="MainController?action=UPDATE_BLOGS&blogID=${a.getBlogID()}">Update</a>
+                                        <a  class="boxed-btn3" href="MainController?action=DELETE_BLOGS&blogID=${a.getBlogID()}" >Delete</a>
+
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </c:forEach>
                 </div>
             </div>
-        </div>
-        <footer>
-            <%@include file="footer.jsp" %>
-        </footer>
+            <!-- footer_start  -->
+            <footer>
+                <%@include file="footer.jsp" %>
+            </footer>
     </body>
 </html>

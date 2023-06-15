@@ -1,30 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
-/**
- *
- * @author PC
- */
-public class BirdDTO {
-    private int AccountID;
-    private int categoriesID;
+import java.io.Serializable;
+
+public class BirdDTO implements Serializable {
+
+    private int birdID;
+    private AccountDTO account;
+    private BirdCategoryDTO birdCategory;
     private String birdName;
     private String birdPhoto;
-    private double height;
-    private double weight;
+    private String height;
+    private String weight;
     private String color;
+    private int categoriesID;
     private String dentification;
     private int birdStatus;
 
     public BirdDTO() {
     }
 
-    public BirdDTO(int AccountID, int categoriesID, String birdName, String birdPhoto, double height, double weight, String color, String dentification, int birdStatus) {
-        this.AccountID = AccountID;
-        this.categoriesID = categoriesID;
+    public BirdDTO(int birdID) {
+        this.birdID = birdID;
+    }
+
+    public BirdDTO(int birdID, AccountDTO account, BirdCategoryDTO birdCategory, String birdName, String birdPhoto, String height, String weight, String color, String dentification, int birdStatus) {
+        this.birdID = birdID;
+        this.account = account;
+        this.birdCategory = birdCategory;
         this.birdName = birdName;
         this.birdPhoto = birdPhoto;
         this.height = height;
@@ -34,20 +36,55 @@ public class BirdDTO {
         this.birdStatus = birdStatus;
     }
 
-    public int getAccountID() {
-        return AccountID;
+    public BirdDTO(String birdName, String height, String weight, String color, String dentification, int birdStatus, String birdPhoto) {
+        this.birdName = birdName;
+        this.height = height;
+        this.weight = weight;
+        this.color = color;
+        this.dentification = dentification;
+        this.birdStatus = birdStatus;
+        this.birdPhoto = birdPhoto;
     }
 
-    public void setAccountID(int AccountID) {
-        this.AccountID = AccountID;
+    public BirdDTO(String birdName, String height, String weight, String color, int birdStatus, String birdPhoto) {
+        this.birdName = birdName;
+        this.height = height;
+        this.weight = weight;
+        this.color = color;
+        this.birdStatus = birdStatus;
+        this.birdPhoto = birdPhoto;
     }
 
-    public int getCategoriesID() {
-        return categoriesID;
+    public BirdDTO(String birdPhoto, String birdName, String height, String weight, String color) {
+        this.birdPhoto = birdPhoto;
+        this.birdName = birdName;
+        this.height = height;
+        this.weight = weight;
+        this.color = color;
     }
 
-    public void setCategoriesID(int categoriesID) {
-        this.categoriesID = categoriesID;
+    public int getBirdID() {
+        return birdID;
+    }
+
+    public void setBirdID(int birdID) {
+        this.birdID = birdID;
+    }
+
+    public AccountDTO getAccount() {
+        return account;
+    }
+
+    public void setAccount(AccountDTO account) {
+        this.account = account;
+    }
+
+    public BirdCategoryDTO getBirdCategory() {
+        return birdCategory;
+    }
+
+    public void setBirdCategory(BirdCategoryDTO birdCategory) {
+        this.birdCategory = birdCategory;
     }
 
     public String getBirdName() {
@@ -66,19 +103,19 @@ public class BirdDTO {
         this.birdPhoto = birdPhoto;
     }
 
-    public double getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public double getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
@@ -88,6 +125,14 @@ public class BirdDTO {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public int getCategoriesID() {
+        return categoriesID;
+    }
+
+    public void setCategoriesID(int categoriesID) {
+        this.categoriesID = categoriesID;
     }
 
     public String getDentification() {

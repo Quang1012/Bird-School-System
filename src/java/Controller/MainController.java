@@ -13,6 +13,7 @@ public class MainController extends HttpServlet {
     //link to jsp
     private static final String HOME_PAGE = "homePage.jsp";
     private static final String MANAGE_ACCOUNT_PAGE = "manageAccount.jsp";
+    private static final String MANAGE_COURSE_PAGE = "adminCourseManagement.jsp";
     private static final String ABOUT_US_PAGE = "about.jsp";
 
     //value of action of User
@@ -61,6 +62,9 @@ public class MainController extends HttpServlet {
     private static final String LOAD_FEEDBACK = "LOAD_FEEDBACK";
     private static final String DASHBOARD = "DASHBOARD";
     private static final String BAN_ACCOUNT = "BAN_ACCOUNT";
+    private static final String MANAGE_COURSE = "MANAGE_COURSE";
+    private static final String LIST_COURSE = "LIST_COURSE";
+    private static final String UPDATE_COURSE = "UPDATE_COURSE";
 
     //link to servlet of User
     private static final String LOAD_HOME_PAGE = "LoadHomePageController";
@@ -82,6 +86,7 @@ public class MainController extends HttpServlet {
     private static final String LOAD_PASSWORD_FORGOT_CONTROLLER = "checkForgotController";
     private static final String RESET_FORGOT_PASSWORD = "ResetPasswordController";
     private static final String LOAD_MY_BLOG = "LoadMyBlogController";
+    private static final String LIST_COURSE_CONTROLLER = "ListCourseController";
 
     // link to servlet of Admin
     private static final String COUNT_ACCOUNT = "COUNT_ACCOUNT";
@@ -89,11 +94,10 @@ public class MainController extends HttpServlet {
     private static final String SEARCH = "SEARCH";
     private static final String SEARCH_ACCOUNT_BY_OPTION = "SearchAccountController";
     private static final String COUNT_ACCOUNT_CONTROLLER = "CountAccountController";
-    private static final String MANAGE_ACCOUNT_CONTROLLER = "ManageAccountController";
-    private static final String LOAD_ACCOUNT_CONTROLLER = "LoadAccountController";
     private static final String LOAD_BIRD_CONTROLLER = "LoadBirdController";
     private static final String UPDATE_ACCOUNT_ALL_ROLE = "UpdateAccountController";
     private static final String BAN_ACCOUNT_CONTROLLER = "BanAccountController";
+    private static final String UPDATE_COURSE_CONTROLLER = "AdminUpdateCourseController";
 
     private static final String LOAD_BIRD_CATEGORY_CONTROLLER = "LoadBirdCategoryController";
 
@@ -134,10 +138,13 @@ public class MainController extends HttpServlet {
                         url = HOME_PAGE;
                         break;
                     case MANAGE_ACCOUNT:
-                        url = COUNT_ACCOUNT_CONTROLLER;
+                        url = LIST_ALL_ACCOUNT;
                         break;
                     case SEARCH_ACCOUNT:
                         url = MANAGE_ACCOUNT_PAGE;
+                        break;
+                    case MANAGE_COURSE:
+                        url = MANAGE_COURSE_PAGE;
                         break;
                     case ABOUT_US:
                         url = ABOUT_US_PAGE;
@@ -175,11 +182,19 @@ public class MainController extends HttpServlet {
                     case BAN_ACCOUNT:
                         url =BAN_ACCOUNT_CONTROLLER ;
                         break;
-
                     case LOAD_ACCOUNT:
                         url = LOAD_ACCOUNT_DETAIL_CONTROLLER;
                         break;
-
+                        
+                        
+                    case LIST_COURSE:
+                        url = LIST_COURSE_CONTROLLER;
+                        break;
+                    case UPDATE_COURSE:
+                        url = UPDATE_COURSE_CONTROLLER;
+                        break;
+                        
+                        
                     case MANAGE_BIRD:
                         url = LOAD_BIRD_CONTROLLER;
                         break;

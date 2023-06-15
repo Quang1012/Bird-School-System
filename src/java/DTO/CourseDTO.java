@@ -4,36 +4,68 @@
  */
 package DTO;
 
+import java.sql.Date;
+
 /**
  *
- * @author PC
+ * @author Dell
  */
 public class CourseDTO {
-    private int courseID;
+
+    private int CourseID;
     private int categoriesID;
+    private String CourseName;
     private String description;
-    private float fee;
+    private String timeOfCourse;
+    private String fee;
     private String image;
-    private int courseStatus;
+    private int CourseStatus;
 
     public CourseDTO() {
     }
 
-    public CourseDTO(int courseID, int categoriesID, String description, float fee, String image, int courseStatus) {
-        this.courseID = courseID;
+    public CourseDTO(int CourseID, String image, String CourseName, int CourseStatus, String timeOfCourse, String fee) {
+        this.CourseID = CourseID;
+        this.image = image;
+        this.CourseName = CourseName;
+        this.CourseStatus = CourseStatus;
+        this.timeOfCourse = timeOfCourse;
+        this.fee = fee;
+    }
+
+    public CourseDTO(int CourseID, int categoriesID, String CourseName, String description, String timeOfCourse, String fee, String image, int CourseStatus) {
+        this.CourseID = CourseID;
         this.categoriesID = categoriesID;
+        this.CourseName = CourseName;
         this.description = description;
+        this.timeOfCourse = timeOfCourse;
         this.fee = fee;
         this.image = image;
-        this.courseStatus = courseStatus;
+        this.CourseStatus = CourseStatus;
+    }
+
+    public CourseDTO(int courseID, String courseName, String fee, String timeOfCourse, int courseStatus) {
+        this.CourseID = courseID;
+        this.CourseName = courseName;
+        this.fee = fee;
+        this.timeOfCourse = timeOfCourse;
+        this.CourseStatus = courseStatus;
+    }
+
+    public String getTimeOfCourse() {
+        return timeOfCourse;
+    }
+
+    public void setTimeOfCourse(String timeOfCourse) {
+        this.timeOfCourse = timeOfCourse;
     }
 
     public int getCourseID() {
-        return courseID;
+        return CourseID;
     }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
+    public void setCourseID(int CourseID) {
+        this.CourseID = CourseID;
     }
 
     public int getCategoriesID() {
@@ -44,6 +76,14 @@ public class CourseDTO {
         this.categoriesID = categoriesID;
     }
 
+    public String getCourseName() {
+        return CourseName;
+    }
+
+    public void setCourseName(String CourseName) {
+        this.CourseName = CourseName;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -52,11 +92,11 @@ public class CourseDTO {
         this.description = description;
     }
 
-    public float getFee() {
+    public String getFee() {
         return fee;
     }
 
-    public void setFee(float fee) {
+    public void setFee(String fee) {
         this.fee = fee;
     }
 
@@ -69,12 +109,11 @@ public class CourseDTO {
     }
 
     public int getCourseStatus() {
-        return courseStatus;
+        return CourseStatus;
     }
 
-    public void setCourseStatus(int courseStatus) {
-        this.courseStatus = courseStatus;
+    public void setCourseStatus(int CourseStatus) {
+        this.CourseStatus = CourseStatus;
     }
-    
-    
+
 }
