@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
+        <servlet-name>ScheduleController</servlet-name>
+        <servlet-class>Controller.ScheduleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FollowBird</servlet-name>
+        <servlet-class>Controller.FollowBird</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>Controller.MainController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>DeleteAccountController</servlet-name>
-        <servlet-class>Controller.DeleteAccountController</servlet-class>
-    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScheduleController</servlet-name>
+        <url-pattern>/ScheduleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FollowBird</servlet-name>
+        <url-pattern>/FollowBird</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteAccountController</servlet-name>
-        <url-pattern>/DeleteAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -22,6 +30,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>MainController</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
