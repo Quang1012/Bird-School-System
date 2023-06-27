@@ -6,6 +6,8 @@
 .update-bird-form{
     margin: 150px auto;
 }
+
+
 .update-bird-heading-form{
     display: flex;
     flex-direction: row;
@@ -18,7 +20,7 @@
     color: #A87B24;
 }
 .update-bird-form-main{
-    padding: 30px 30px; 
+    padding: 30px 30px;
     border: 2px solid grey;
     border-radius: 20px;
 }

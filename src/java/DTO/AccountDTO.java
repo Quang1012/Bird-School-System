@@ -46,6 +46,10 @@ public class AccountDTO implements Serializable {
         this.phone = phone;
         this.accountStatus = accountStatus;
     }
+
+    public AccountDTO(int accID) {
+        this.accountID = accID;
+    }
     
     public int getAccountID() {
         return accountID;

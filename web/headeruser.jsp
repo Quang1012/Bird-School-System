@@ -13,11 +13,12 @@
         <title>Animal</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!-- <link rel="manifest" href="site.webmanifest"> -->
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
         <!-- Place favicon.ico in the root directory -->
-
+        <link href="CSS/login_1.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/magnific-popup.css" rel="stylesheet" type="text/css"/>
@@ -33,7 +34,6 @@
     </head>
 
     <body>
-
         <header>
             <div class="header-area ">
                 <div class="header-top_area">
@@ -82,18 +82,18 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a  href="MainController?action=HOME_USER">HOME</a></li>
+                                            <li><a  href="MainController?action=MY_BIRD">BIRD</a></li>
                                             <li><a href="MainController?action=BLOG">BLOG</a></li>
-                                            <li><a  href="MainController?action=Course">Course</a> <i class="ti-angle-down"></i></a>
+                                            <li><a  href="#">Course</a> <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">blog</a></li>
-                                                    <li><a href="single-blog.html">Course online</a></li>
+                                                    <li><a href="MainController?action=LIST_COURSE_FOR_USER">Course</a></li>
                                                 </ul>
                                             </li>
 
                                             <li><a href="MainController?action=LOAD_FEEDBACK">Feedback</a></li>
-                                            <li><a href="">Welcome ${sessionScope.acc.getName()}</a>
+                                            <li><a href="#">Welcome ${sessionScope.acc.getName()}</a>
                                                 <ul class="submenu">
-                                                    <li><a href="MainController?action=ProfileLoad">Setting Account</a></li>
+                                                    <li><a href="MainController?action=ProfileLoad&acc=${sessionScope.acc.getAccountID()}">Setting Account</a></li>
                                                     <li><a href="MainController?action=Logout">Logout</a></li>
                                                 </ul>
                                             </li>

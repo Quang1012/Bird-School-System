@@ -38,7 +38,7 @@
                                     <div class="test_content">
                                         <h4>${a.getTitle()}</h4>
                                         <span>${a.getCreateTime()}</span>
-                                        <p>#${a.getBlogID()}</p>
+                                        <p>${a.getBlogID()}</p>
                                         <p>${a.getBody()}</p>
                                         <a class="boxed-btn3"  href="MainController?action=UPDATE_BLOGS&blogID=${a.getBlogID()}">Update</a>
                                         <a  class="boxed-btn3" href="MainController?action=DELETE_BLOGS&blogID=${a.getBlogID()}" >Delete</a>

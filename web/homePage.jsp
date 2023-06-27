@@ -3,6 +3,8 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="CSS/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -16,6 +18,7 @@
         <link href="CSS/animate.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/slicknav.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style_1.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/CoachCV.css" rel="stylesheet" type="text/css"/>
     </head>
     <title>Welcome</title>
 </head>
@@ -23,13 +26,13 @@
     <header>
         <c:choose>
             <c:when test="${sessionScope.acc.role == 0}">
-                <%@include file="headeruser.jsp" %>
+                <jsp:include page="headeruser.jsp" ></jsp:include>
             </c:when>
             <c:when test="${sessionScope.acc.role == 1}">
-                <%@include file="headeradmin.jsp" %>
+                <jsp:include page="headeradmin.jsp" ></jsp:include>
             </c:when>
             <c:otherwise>
-                <%@include file="headerguest.jsp"%>
+                <jsp:include page="headerguest.jsp" ></jsp:include>
             </c:otherwise>
         </c:choose>
     </header>
@@ -60,7 +63,7 @@
             <div class="row justify-content-center ">
                 <div class="col-lg-7 col-md-10">
                     <div class="section_title text-center mb-95">
-                        <h3>Services for every dog</h3>
+                        <h3>Services for every Bird</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
                     </div>
                 </div>
@@ -74,7 +77,7 @@
                             </div>
                         </div>
                         <div class="service_content text-center">
-                            <h3>Pet Boarding</h3>
+                            <h3>Bird Boarding</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
                         </div>
                     </div>
@@ -100,7 +103,7 @@
                             </div>
                         </div>
                         <div class="service_content text-center">
-                            <h3>Pet Spa</h3>
+                            <h3>Bird Spa</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
                         </div>
                     </div>
@@ -126,15 +129,34 @@
                                 As you care</h3>
                             <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do <br> iusmod tempor incididunt ut labore et dolore magna aliqua. <br> Quis ipsum suspendisse ultrices gravida. Risus commodo <br>
                                 viverra maecenas accumsan.</p>
-                            <a href="about.html" class="boxed-btn3">About Us</a>
+                            <a href="about.jsp" class="boxed-btn3">About Us</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- pet_care_area_end  -->
-
+    <!-- For coach send cv  -->
+    <div class="ct-icon">
+        <div class="icon-ct">
+            <div class="icon-anh">
+                <img src="img/team/bird.png">
+            </div>
+            <div class="icon-ct1">
+                <span>
+                    <p id="p-icon-ct1">You are coach. Want to express your skill</p>
+                </span>
+                <span id="sp-iconct1">
+                    <p id="p-icon-ct2">
+                        Click the button below and send us your information to join us
+                    </p>
+                </span>
+                <a href="#" id="a-iconct1">
+                    Hit this!
+                </a>
+            </div>
+        </div>
+    </div>
     <!-- adapt_area_start  -->
     <div class="adapt_area">
         <div class="container">
@@ -156,7 +178,7 @@
                                 <div class="single_adapt text-center">
                                     <img src="img/about/kisbird.png" alt="" style="width: 100px; height: 100px;">
                                     <div class="adapt_content">
-                                        <h3 class="counter">452</h3>
+                                        <h3 class="counter"></h3>
                                         <p>Birds Available</p>
                                     </div>
                                 </div>

@@ -13,14 +13,14 @@ import utils.DBContext;
 public class AccountDAO implements Serializable {
 
     private static final String GET_ALL = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM dbo.tblAccount WHERE role != 2";
-    private static final String REGISTER = "INSERT INTO Account(email, password, name, profilePhoto, role, phone, accountStatus) VALUES(?,?,?,?,?,?,?)";
+    private static final String REGISTER = "INSERT INTO dbo.tblAccount(email, password, name, profilePhoto, role, phone, accountStatus) VALUES(?,?,?,?,?,?,?)";
     private static final String LOGIN = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM dbo.tblAccount WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS AND password = ? ";
     private static final String CHECK_DUPLICATE = "SELECT email FROM dbo.tblAccount WHERE email = ? COLLATE SQL_Latin1_General_CP1_CS_AS";
     private static final String UPDATE_ACCOUNT = "UPDATE dbo.tblAccount SET name= ? , email = ? ,password = ?, phone = ? WHERE accountID = ? ";
     private static final String DELETE_ACCOUNT = "ALTER TABLE dbo.tblBlog\n"
             + "DROP CONSTRAINT account;"
             + "DELETE FROM dbo.tblAccount WHERE accountID = ?";
-    private static final String GET_ALL_BY_ID = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM Account WHERE accountID = ? ";
+    private static final String GET_ALL_BY_ID = "SELECT accountID, email, password, name, profilePhoto, role, phone, accountStatus FROM dbo.tblAccount WHERE accountID = ? ";
     private static final String UPDATE_ACCOUNT_NEW = "UPDATE Account SET email= ?, password = ?, name = ?, phone = ?  WHERE accountID = ? ";
     private static final String DASHBOARD = "SELECT COUNT(AccountID) as AccountID\n"
             + "FROM dbo.tblAccount";
@@ -28,6 +28,7 @@ public class AccountDAO implements Serializable {
     private static final String FIND_ACCOUNT_BY_OPTION = "SELECT * FROM dbo.tblAccount\n";
     private static final String RESET_ACCOUNT_PASSWORD = "UPDATE Account SET password = ? WHERE accountID = ?";
     private static final String BAN_ACCOUNT = "UPDATE dbo.tblAccount SET accountStatus = ? WHERE accountID = ?";
+    private static final String GET_ACCOUNT_BY_BIRDID = "select accountID from dbo.tblBird where birdID = ?";
 
     public int countAccount() throws Exception {
         Connection con = null;
@@ -58,8 +59,40 @@ public class AccountDAO implements Serializable {
         }
         return count;
     }
+    
+    public AccountDTO getAccountByBird(int birdID) throws SQLException{
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBContext.getConnection();
+            if(con != null){
+                stm = con.prepareStatement(GET_ACCOUNT_BY_BIRDID);
+                stm.setInt(1, birdID);
+                rs = stm.executeQuery();
+                if(rs.next()){
+                    int accID = rs.getInt("accountID");
+                    AccountDTO acc = new AccountDTO(accID);
+                    return acc;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
 
-    public static ArrayList<AccountDTO> findAccByOption(String txtSearch, String searchBy) {
+    public static ArrayList<AccountDTO> findAccByOption(String txtSearch, String searchBy) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -93,9 +126,21 @@ public class AccountDAO implements Serializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
         return list;
     }
+
+    
 
     public AccountDTO getByID(int accountID) throws SQLException {
         Connection con = null;
@@ -444,7 +489,7 @@ public class AccountDAO implements Serializable {
         return check;
     }
 
-    public boolean banAccount(int id, int status) {
+    public boolean banAccount(int id, int status) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         boolean check = false;
@@ -459,6 +504,14 @@ public class AccountDAO implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }     
         return check;
     }
 }

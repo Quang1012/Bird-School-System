@@ -80,10 +80,10 @@
                                         <ul id="navigation">
                                             <li><a  href="MainController?action=HOME_USER">HOME</a></li>
                                             <li><a href="MainController?action=BLOG">BLOG</a></li>
-                                            <li><a  href="MainController?action=Course">Course</a> <i class="ti-angle-down"></i></a>
+                                            <li><a  href="#">Course</a> <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">Course</a></li>
-                                                    <li><a href="single-blog.html">Course online</a></li>
+                                                    <li><a href="MainController?action=LIST_COURSE_FOR_USER">Course</a></li>
+                                                    <li><a href="MainController?action=LIST_COURSE_FOR_USER">Course online</a></li>
                                                 </ul>
                                             </li>
 
@@ -102,52 +102,62 @@
             </div>
         </header>
         <div class="login-container">
-                <div class="login-body-container">
-                    <span id="close" class="close_button"><img class="close-img" src="image/closeButton.png" alt="icon"/></span>
-                    <div class="login-form d-flex justify-content-between">
-                        <div class="login-left-site">
-                            <div class="left-content">
-                                <div class="left-content-heading">
-                                    <b>Welcome To</b><br>
-                                    <b>The Bird FLY TRAINING </b>
-                                    <span style="font-size: 25px;">Now here?</span>
-                                </div>                              
-                            </div>
-                            <div class="btn-left">
-                                <form action="MainController"  method="POST">
-                                    <button type="submit" name="action" value="Register" class="btn left-btn">Register</button>
-                                </form>
-                            </div>
+            <div class="login-body-container">
+                <span id="close" class="close_button"><img class="close-img" src="image/closeButton.png" alt="icon"/></span>
+                <div class="login-form d-flex justify-content-between">
+                    <div class="login-left-site">
+                        <div class="left-content">
+                            <div class="left-content-heading">
+                                <b>Welcome To</b><br>
+                                <b>The Bird FLY TRAINING </b>
+                                <span style="font-size: 25px;">Now here?</span>
+                            </div>                              
                         </div>
-                        <div class="login-right-site">
-                            <div class="login-right-site-body">
-                                <div class="login-right-heading">
-                                    <b>SIGN IN</b>
-                                </div>
-                                <div class="login-register">
-                                    Login Form 
-                                    <form action="MainController" method="post">
-                                        <p class="text-danger">${requestScope.mess}</p>
-                                        <input type="email" name="email" value="" class="form-control" placeholder="Enter email"required="" >
-                                        <input type="password" name="password" value="" class="form-control" placeholder="Password"required="" >
-                                        <a href="forgotPassword.jsp">Forgot Password</a>
-                                        <button type="submit" name="action" value="Login"  class="btn btn-login">Sign in</button>
-                                    </form>
-                                </div>
+                        <div class="btn-left">
+                            <form action="MainController"  method="POST">
+                                <button type="submit" name="action" value="Register" class="btn left-btn">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="login-right-site">
+                        <div class="login-right-site-body">
+                            <div class="login-right-heading">
+                                <b>SIGN IN</b>
+                            </div>
+                            <div class="login-register">
+                                Login Form 
+                                <form action="MainController" method="post">
+                                    <p class="text-danger" id = "error-message"></p>
+                                    <input type="email" name="email" value="" class="form-control" placeholder="Enter email"required="" >
+                                    <input type="password" name="password" value="" class="form-control" placeholder="Password"required="" >
+                                    <a href="forgotPassword.jsp">Forgot Password</a>
+                                    <button type="submit" name="action" value="Login"  class="btn btn-login">Sign in</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         <script>
 
             document.getElementById("button").addEventListener("click", function () {
                 document.querySelector(".login-container").style.display = "flex";
             });
 
-            document.getElementById("close").addEventListener("click", function () {
+            document.getElementById("close").addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default link behavior
                 document.querySelector(".login-container").style.display = "none";
             });
+        </script>
+        <script>
+            window.onload = function () {
+                var errorMessage = '<%= request.getAttribute("mess")%>';
+                if (errorMessage && errorMessage.trim().toLowerCase() !== "null") {
+                    document.getElementById("error-message").textContent = errorMessage;
+                    document.querySelector(".login-container").style.display = "flex";
+                }
+            };
         </script>
     </body>
 </html>

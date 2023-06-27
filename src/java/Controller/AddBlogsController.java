@@ -25,7 +25,7 @@ public class AddBlogsController extends HttpServlet {
             String url = null;
             BlogDAO b = new BlogDAO();
             try {
-                int accountID = Integer.valueOf(request.getParameter("accountID"));
+                int accountID = Integer.parseInt(request.getParameter("accountID"));
                 String Body = request.getParameter("Body");
                 String Title = request.getParameter("Title");
                 String Media = request.getParameter("Media");

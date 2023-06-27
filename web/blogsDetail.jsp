@@ -30,7 +30,7 @@
             <div class="blogs-main-site">
                 <div class="introduction-blogs-site">
                     <div class="card-top" style="width: 100%;">
-                        <h5>TOURNMANT AND BIRD</h5>
+                        <h5>Course AND BIRD</h5>
                         <h1>BLOGS</h1>
                     </div>
                 </div>

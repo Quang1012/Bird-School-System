@@ -27,17 +27,17 @@ public class BlogDAO implements Serializable {
     "WHERE b.createTime >= GETDATE() " +
     ") AS subquery " +
     "ORDER BY subquery.createTime ASC";
-    private final static String LIST_BLOG = "SELECT b.blogID, b.account, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
+    private final static String LIST_BLOG = "SELECT b.blogID, b.accountID, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
             + "FROM dbo.tblBlog b";
-    private final static String BLOG_DETAIL = "SELECT b.blogID, b.account, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
+    private final static String BLOG_DETAIL = "SELECT b.blogID, b.accountID, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
             + "FROM dbo.tblBlog b\n"
             + "WHERE b.blogID = ?";
-    private final static String ANOTHER_DETAIL = "SELECT b.blogID, b.account, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
+    private final static String ANOTHER_DETAIL = "SELECT b.blogID, b.accountID, b.body, b.title, b.media, FORMAT(CAST(b.createTime AS datetime),'dd/MM/yyyy HH:mm:ss') AS createTime\n"
             + "FROM dbo.tblBlog b\n"
             + "WHERE blogID NOT IN (SELECT blogID FROM dbo.tblBlog WHERE blogID = ?);";
     private final static String DELETE_BLOG = "DELETE FROM dbo.tblBlog  \n"
             + "WHERE blogID = ? ";
-    private final static String ADD_BLOG = "INSERT INTO dbo.tblBlog[account],[body],[title],[media],[createTime])\n"
+    private final static String ADD_BLOG = "INSERT INTO dbo.tblBlog([account],[body],[title],[media],[createTime])\n"
             + "VALUES(?,?,?,?,GETDATE());";
     private final static String UPDATE_BLOG = "UPDATE dbo.tblBlog\n"
             + "SET body = ?, title =?, media =?, createTime = GETDATE()\n"
@@ -72,7 +72,7 @@ public class BlogDAO implements Serializable {
         return result;
     }
 
-    public static int addBlog(int accountID, String Body, String Title, String Media) throws SQLException {
+    public int addBlog(int accountID, String Body, String Title, String Media) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int result = 0;
@@ -139,7 +139,7 @@ public class BlogDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int nblogID = rs.getInt("blogID");
-                    int accountID = rs.getInt("account");
+                    int accountID = rs.getInt("accountID");
                     String Body = rs.getString("Body");
                     String Title = rs.getString("Title");
                     String Media = rs.getString("Media");
@@ -213,7 +213,7 @@ public class BlogDAO implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int blogID = rs.getInt("blogID");
-                    int accountID = rs.getInt("account");
+                    int accountID = rs.getInt("accountID");
                     String Body = rs.getString("body");
                     String Title = rs.getString("title");
                     String Media = rs.getString("media");

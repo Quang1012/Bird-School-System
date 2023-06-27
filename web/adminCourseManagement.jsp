@@ -12,12 +12,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Course Management</title>
+        <link href="CSS/CourseManage.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header>
             <%@include file="headeradmin.jsp" %>
         </header>
-        <div>
+<!--        <div>
             <font color="red">
             <h1>Course Management</h1>
             <%
@@ -31,12 +32,13 @@
                         }
                     }
             %>
-            Welcome, <%= username%>
+            Welcome, <%= session.getAttribute("acc") %>
             <%
                 }
             %>
             </font>
-        </div>
+        </div>-->
+         
         <form action="MainController">
             List Courses: <br>
             <input type="submit" value="LIST_COURSE" name="action">
@@ -49,7 +51,7 @@
         %>
         </br>
 
-        <table border="1">
+        <table Class="tb-separate" border="1">
             <thead>
                 <tr>
                     <th>Course ID</th>

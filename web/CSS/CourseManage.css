@@ -1,0 +1,37 @@
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+ border: 2px solid deeppink; 
+}
+
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+
+td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #e5e5e5;
+}
+
+.tb-separate {
+       border-collapse: separate; 
+       border-spacing:  5px;      
+ }

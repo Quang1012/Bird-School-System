@@ -24,7 +24,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "UpdateAccountController", urlPatterns = {"/UpdateAccountController"})
 public class UpdateAccountController extends HttpServlet {
-    public static String url="";
+
+    public static final String url = "ErrorSearch.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,30 +41,29 @@ public class UpdateAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nn = request.getParameter("userId");
-            int id = Integer.parseInt(nn);
-            String newName = request.getParameter("newName");
-            String newEmail = request.getParameter("newEmail");
-            String newPassword = request.getParameter("newPassword");
-            String newPhone = request.getParameter("newPhone");
-            String lastSearchValue = request.getParameter("lastSearchValue");
-            String searchByValue = request.getParameter("searchByValue");
-
-            if (newName.trim().isEmpty()) {
-                newName = request.getParameter("oldName");
-            } else if (newEmail.trim().isEmpty()) {
-                newEmail = request.getParameter("oldEmail");
-            } else if (newPassword.trim().isEmpty()) {
-                newPassword = request.getParameter("oldPassword");
-            } else if (newPhone.isEmpty() || newPhone.isBlank()) {
-                newPhone = request.getParameter("oldPhone");
+            String url = "";
+            int id = Integer.parseInt(request.getParameter("accID"));
+            String newEmail = request.getParameter("email-update");
+            String newPhone = request.getParameter("phone-update");
+            String newName = request.getParameter("name-update");
+            String newPassword = request.getParameter("password-update");
+            String rePassword = request.getParameter("repass-update");
+            String mess = "";
+            if (!rePassword.equals(newPassword)) {
+                mess = "Re-Password not equals New Password";
+                url = "MainController?action=ProfileLoad&acc=" + id;
+            } else {
+                AccountDAO accdao = new AccountDAO();
+                boolean check = accdao.updateAccount(newName, newEmail, newPassword, newPhone, id);
+                if (check) {
+                    url = "MainController?action=ProfileLoad&acc=" + id;
+                    mess = "Update Successfull";
+                }else{
+                    mess = "Update Fail";
+                }
             }
-            AccountDAO accdao = new AccountDAO();
-            boolean check = accdao.updateAccount(newName, newEmail, newPassword, newPhone, id);
-            if (check) {
-                url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
-                response.sendRedirect(url);
-            }
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
             System.out.println("Error at UpdateAccountController: " + ex.getMessage());
         }

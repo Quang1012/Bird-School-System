@@ -46,7 +46,7 @@ public class CourseDAO {
                     String image = rs.getString("image");
                     int CourseStatus = rs.getInt("CourseStatus");
 
-                    CourseDTO courseDTO = new CourseDTO(CourseID, categoriesID, CourseName, description ,timeOfCourse, fee, image, CourseStatus);
+                    CourseDTO courseDTO = new CourseDTO(CourseID, categoriesID, CourseName, description, timeOfCourse, fee, image, CourseStatus);
 
                     if (listCourses == null) {
                         listCourses = new ArrayList<CourseDTO>();
@@ -70,7 +70,7 @@ public class CourseDAO {
     }
 
     public boolean updateCourse(int CourseID, int categoriesID, String CourseName,
-         String description, String timeOfCourse, String fee, int CourseStatus) throws SQLException {
+            String description, String timeOfCourse, String fee, int CourseStatus) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -109,5 +109,137 @@ public class CourseDAO {
             }
         }
         return false;
+    }
+
+    public List<CourseDTO> getCourseByCate(int cateID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<CourseDTO> courseList = new ArrayList<>();
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement("select * from dbo.tblCourse where categoriesID = ?");
+                stm.setInt(1, cateID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    courseList.add(new CourseDTO(rs.getInt("courseID"), rs.getInt("categoriesID"),
+                            rs.getString("coursename"), rs.getString("description"),
+                            rs.getString("timeofcourse"), rs.getString("fee"), rs.getString("image"), rs.getInt("courseStatus")));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return courseList;
+    }
+
+    public List<CourseDTO> getCourseByName(String name) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<CourseDTO> courseList = new ArrayList<>();
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement("select * from dbo.tblCourse where coursename like ?");
+                stm.setString(1, "%" + name + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    courseList.add(new CourseDTO(rs.getInt("courseID"), rs.getInt("categoriesID"),
+                            rs.getString("coursename"), rs.getString("description"),
+                            rs.getString("timeofcourse"), rs.getString("fee"), rs.getString("image"), rs.getInt("courseStatus")));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return courseList;
+    }
+
+    public List<CourseDTO> getCourseByPrice(int min, int max) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        List<CourseDTO> courseList = new ArrayList<>();
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement("select * from dbo.tblCourse where fee >= ? and fee <= ?");
+                stm.setInt(1, min);
+                stm.setInt(2, max);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    courseList.add(new CourseDTO(rs.getInt("courseID"), rs.getInt("categoriesID"),
+                            rs.getString("coursename"), rs.getString("description"),
+                            rs.getString("timeofcourse"), rs.getString("fee"), rs.getString("image"), rs.getInt("courseStatus")));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return courseList;
+    }
+
+    public CourseDTO getCourse(int id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement("select coursename, categoriesID, description,fee,image,timeofcourse from dbo.tblCourse where courseID = ?");
+                stm.setInt(1, id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    CourseDTO cour = new CourseDTO(id,rs.getString("coursename"), rs.getInt("categoriesID"),
+                            rs.getString("description"), rs.getString("fee"), rs.getString("image"), rs.getString("timeofcourse"));
+                    return cour;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
     }
 }

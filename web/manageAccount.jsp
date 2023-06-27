@@ -17,105 +17,108 @@
         <link href="CSS/gijgo.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/animate.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/slicknav.css" rel="stylesheet" type="text/css"/>
-        <link href="CSS/cssss/style.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/style_1.css" rel="stylesheet" type="text/css"/>
         <title>Manage Account</title>
     </head>
     <body>
         <header>
             <%@include file="headeradmin.jsp" %>
         </header>
-        <form action="MainController" method="post">
-
-            <input  name="txtSearch" type="text" class="form-control" placeholder='Search Keyword'
-                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-            <select class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"name="searchBy">
-                <option value="byName">By Name</option>
-                <option value="byEmail">By Email</option>
-                <option value="byPhone">By Phone</option>
-            </select>
-
-            <input type="submit" name="action" value="SEARCH" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                   type="submit">
-
-        </form>
         <div>
-            <c:set var="acc" value="${requestScope.searchList}"></c:set>
-            <c:choose>
-                <c:when test="${acc != null}">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Account Name</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Block</th>
-                                <th scope="col">Unblock</th>
-                                <th scope="col">Detail</th>
+            <form action="MainController" method="post">
+                <input  name="txtSearch" type="text" class="form-control" placeholder='Search Keyword'
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                <select class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"name="searchBy">
+                    <option value="byName">By Name</option>
+                    <option value="byEmail">By Email</option>
+                    <option value="byPhone">By Phone</option>
+                </select>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="acc" items="${requestScope.searchList}">
-                            <form action="MainController" method="post">
-                                <input type="hidden" name="lastSearchValue" value="${requestScope.lastSearchValue}">
-                                <input type="hidden" name="searchByValue" value="${requestScope.searchByValue}">
-                                <input type="hidden" name="accountStatus" value="${acc.accountStatus}">
-                                <tr>
-                                    <th scope="row">${acc.accountID}</th>
-                                    <td>${acc.name}</td>
-
-                                    <td>
-                                        <c:choose>
-                                            <c:when test="${acc.role == 0}">User</c:when>
-                                            <c:otherwise>Admin</c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td>
-                                        <c:choose>
-                                            <c:when test="${acc.accountStatus == 1}">Active</c:when>
-                                            <c:otherwise>Inactive</c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td>
-                                        <c:choose>
-                                            <c:when test="${acc.accountStatus == 0 && acc.role == 0}">Block</c:when>
-                                            <c:when test="${acc.accountStatus == 0 && acc.role == 1}"></c:when>
-                                            <c:when test="${acc.accountStatus == 1 && acc.role == 1}"></c:when>
-                                            <c:otherwise>
-                                                <a class="custom-button_2" href="MainController?action=BAN_ACCOUNT&userId=${acc.accountID}&accountStatus=${acc.accountStatus}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}">Block</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td>
-                                        <c:choose>
-                                            <c:when test="${acc.accountStatus == 1 && acc.role == 0}">Unblock</c:when>
-                                            <c:when test="${acc.accountStatus == 1 && acc.role == 1}"></c:when>
-                                            <c:when test="${acc.accountStatus == 0 && acc.role == 1}"></c:when>
-                                            <c:otherwise>
-                                                <a class="custom-button_2" href=MainController?action=BAN_ACCOUNT&userId=${acc.accountID}&accountStatus=${acc.accountStatus}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}">Unblock</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
-                                    <td>
-                                        <a class="custom-button_2" href="ManageAccountController?action=Detail&accountID=${acc.accountID}">Detail</a>
-                                    </td>    
-                                </tr>
-                            </form>
-                        </c:forEach>
-
-                        </tbody>
-                    </table>
-                </c:when>
-                <c:otherwise>
-                    <c:out value="${mess}"></c:out>
-                </c:otherwise>
-            </c:choose>
+                <input type="submit" name="action" value="SEARCH" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                       type="submit">
+            </form>
         </div>
-        <section>
-        <c:choose>
-            <c:when test="${requestScope.allAcc != null}">
-                <table class="table table-striped">
+        <a id="myForm" href="MainController?action=COUNT_ACCOUNT"></a>
+    </form>
+    Total Account existed: ${accCount}</div>
+<div>
+    <c:set var="acc" value="${requestScope.searchList}"></c:set>
+    <c:choose>
+        <c:when test="${acc != null}">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Account Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Block</th>
+                        <th scope="col">Unblock</th>
+                        <th scope="col">Detail</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="acc" items="${requestScope.searchList}">
+                    <form action="MainController" method="post">
+                        <input type="hidden" name="lastSearchValue" value="${requestScope.lastSearchValue}">
+                        <input type="hidden" name="searchByValue" value="${requestScope.searchByValue}">
+                        <input type="hidden" name="accountStatus" value="${acc.accountStatus}">
+                        <tr>
+                            <th scope="row">${acc.accountID}</th>
+                            <td>${acc.name}</td>
+
+                            <td>
+                                <c:choose>
+                                    <c:when test="${acc.role == 0}">User</c:when>
+                                    <c:otherwise>Admin</c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${acc.accountStatus == 1}">Active</c:when>
+                                    <c:otherwise>Inactive</c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${acc.accountStatus == 0 && acc.role == 0}">Block</c:when>
+                                    <c:when test="${acc.accountStatus == 0 && acc.role == 1}"></c:when>
+                                    <c:when test="${acc.accountStatus == 1 && acc.role == 1}"></c:when>
+                                    <c:otherwise>
+                                        <a class="custom-button_2" href="MainController?action=BAN_ACCOUNT&userId=${acc.accountID}&accountStatus=${acc.accountStatus}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}">Block</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${acc.accountStatus == 1 && acc.role == 0}">Unblock</c:when>
+                                    <c:when test="${acc.accountStatus == 1 && acc.role == 1}"></c:when>
+                                    <c:when test="${acc.accountStatus == 0 && acc.role == 1}"></c:when>
+                                    <c:otherwise>
+                                        <a class="custom-button_2" href=MainController?action=BAN_ACCOUNT&userId=${acc.accountID}&accountStatus=${acc.accountStatus}&lastSearchValue=${requestScope.lastSearchValue}&searchByValue=${requestScope.searchByValue}">Unblock</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <a class="custom-button_2" href="MainController?action=Detail&accountID=${acc.accountID}">Detail</a>
+                            </td>    
+                        </tr>
+                    </form>
+                </c:forEach>
+
+                </tbody>
+            </table>
+        </c:when>
+        <c:otherwise>
+            <c:out value="${mess}"></c:out>
+        </c:otherwise>
+    </c:choose>
+</div>
+<div>
+    <c:choose>
+        <c:when test="${requestScope.allAcc != null}">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -128,7 +131,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${requestScope.allAcc}" var="a">
+                    <c:forEach items="${requestScope.allAcc}" var="a">
                         <tr>
                             <th scope="row">${a.accountID}</th>
                             <td>${a.name}</td>
@@ -150,7 +153,7 @@
                                     <c:when test="${a.accountStatus == 0 && a.role == 1}"></c:when>
                                     <c:when test="${a.accountStatus == 1 && a.role == 1}"></c:when>
                                     <c:otherwise>
-                                        <a class="custom-button_2" href="ManageAccountController?action=Block&accountID=${a.accountID}">Block</a>
+                                        <a class="custom-button_2" href="MainController?action=BAN_ACCOUNT&userId=${a.accountID}&accountStatus=${a.accountStatus}">Block</a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -160,69 +163,39 @@
                                     <c:when test="${a.accountStatus == 1 && a.role == 1}"></c:when>
                                     <c:when test="${a.accountStatus == 0 && a.role == 1}"></c:when>
                                     <c:otherwise>
-                                        <a class="custom-button_2" href="ManageAccountController?action=Unblock&accountID=${a.accountID}">Unblock</a>
+                                        <a class="custom-button_2" href="MainController?action=BAN_ACCOUNT&userId=${a.accountID}&accountStatus=${a.accountStatus}">Unblock</a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
                             <td>
-                                <a class="custom-button_2" href="ManageAccountController?action=Detail&accountID=${a.accountID}">Detail</a>
+                                <a class="custom-button_2" href="MainController?action=Detail&accountID=${acc.accountID}">Detail</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            </c:when>
-        </c:choose>
-        </section>
-<!--        <div class="edit-container d-none">
-            <div class="edit-body-container-body-container">
-                <span id="close" onclick="closeLoginPopup()"><img class="close-img" src="image/closeButton.png" alt="icon"/></span>
-                <div class="edit-form-form d-flex justify-content-between">
-                    <div class="edit-right-site-body">
-                        <div class="signup-right-heading">
-                            <b>Update Account</b>
-                        </div>
-                        <div class="login-register">
-                            <form action="MainController" method="post" id="form">
-                                <input type="hidden" name="userId" value="${acc.getAccountID()}">
-                                <div class="form-group">
-                                    <input type="text"  placeholder="Enter Name" name="newName" value="${acc.getName()}" class="form-control"required="" >
-                                    <input type="hidden" name="oldName" value="${acc.getName()}">
-                                </div> 
-                                <div class="form-group">
-                                    <input type="email"  placeholder="Enter email" name="newEmail" value="" class="form-control"required="">
-                                    <input type="hidden" name="oldEmail" value="${acc.getEmail()}">
-                                </div>  
-                                <div class="form-group" >
-                                    <input type="text"  placeholder="Enter password" name="newPassword" value=""class="form-control"required="" >
-                                    <input type="hidden" name="oldPassword" value="${acc.getPassword()}">
-                                </div>      
-                                <div class="form-group">
-                                    <input type="password"  placeholder="Enter Phone" name="newPhone" value=""  class="form-control"required="" >
-                                    <input type="hidden" name="oldPhone" value="${acc.getPhone()}">
-                                </div> 
-                                <div class="form-group">
-                                    <input type="password"  placeholder="Enter password again" name="repass" value="" id="txtRepass" class="form-control"required="">
-                                </div>  
-                                <button type="submit" name="action" value="UPDATE" class="btn btn-login">Update</button>
-                            </form>
-                        </div> 
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        <footer>
-            <%@include file="footer.jsp" %>
-        </footer>       
-        <script>
-
-            document.getElementById("edit").addEventListener("click", function () {
-                document.querySelector(".edit-container").style.display = "flex";
-            });
-
-            document.getElementById("close").addEventListener("click", function () {
-                document.querySelector(".edit-container").style.display = "none";
-            });
-        </script>
-    </body>
+        </c:when>
+    </c:choose>
+</div>
+<footer>
+    <%@include file="footer.jsp" %>
+</footer>       
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var link = document.getElementById("myForm");
+    if (!sessionStorage.getItem('linkClicked')) {
+      // Simulate a click event using AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", link.getAttribute("href"), true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Request completed successfully
+          sessionStorage.setItem('linkClicked', true);
+        }
+      };
+      xhr.send();
+    }
+  });
+</script>
 </html>

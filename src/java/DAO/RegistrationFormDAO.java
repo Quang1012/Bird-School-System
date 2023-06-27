@@ -402,4 +402,32 @@ public class RegistrationFormDAO implements Serializable {
         }
         return null;
     }
+    
+    public boolean createRegisForm(int courseID, int accountID, int birdID, String note, int formStatus) throws SQLException{
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean check = false;
+        try {
+            con = DBContext.getConnection();
+            if(con != null){
+                stm = con.prepareStatement("insert into dbo.tblRegistrationForm(courseID,accountID,birdID,note,formStatus) values(?,?,?,?,?)");
+                stm.setInt(1, courseID);
+                stm.setInt(2, accountID);
+                stm.setInt(3, birdID);
+                stm.setString(4, note);
+                stm.setInt(5, formStatus);
+                check = stm.execute() ? check : !check;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return check;
+    }
 }

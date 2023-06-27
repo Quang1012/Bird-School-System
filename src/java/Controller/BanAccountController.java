@@ -7,6 +7,9 @@ package Controller;
 import DAO.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +22,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "BanAccountController", urlPatterns = {"/BanAccountController"})
 public class BanAccountController extends HttpServlet {
+
     private static final String FAIL = "error.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,7 +35,7 @@ public class BanAccountController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int Id = Integer.parseInt(request.getParameter("userId"));
@@ -40,26 +45,24 @@ public class BanAccountController extends HttpServlet {
             AccountDAO accDao = new AccountDAO();
             String url = "";
             boolean check;
-            if(status == 1){
+            if (status == 1) {
                 check = accDao.banAccount(Id, 0);
-                if(check){
+                if (check) {
                     url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
-                }else{
-                    url= FAIL;
+                } else {
+                    url = FAIL;
                 }
-            }else{
+            } else {
                 check = accDao.banAccount(Id, 1);
-                if(check){
-                    if(!lastSearchValue.trim().isEmpty() && !lastSearchValue.trim().isBlank() && !searchByValue.trim().isEmpty() && !searchByValue.trim().isBlank()){
-                        url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
-                    }else{
-                        url = "MainController?action=LISTALLACCOUNT";
-                    }
-                }else{
-                    url= FAIL;
+                if (check) {
+                    url = "MainController?action=SEARCH&txtSearch=" + lastSearchValue + "&searchBy=" + searchByValue;
+                } else {
+                    url = FAIL;
                 }
             }
             response.sendRedirect(url);
+        } catch (SQLException ex) {
+            Logger.getLogger(BanAccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

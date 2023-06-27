@@ -5,36 +5,60 @@
         <servlet-class>Controller.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteAccountController</servlet-name>
-        <servlet-class>Controller.DeleteAccountController</servlet-class>
+        <servlet-name>UpdateBirdFormController</servlet-name>
+        <servlet-class>Controller.UpdateBirdFormController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoadMyBlogController</servlet-name>
-        <servlet-class>Controller.LoadMyBlogController</servlet-class>
+        <servlet-name>ListCourseUserController</servlet-name>
+        <servlet-class>Controller.ListCourseUserController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BanAccountController</servlet-name>
-        <servlet-class>Controller.BanAccountController</servlet-class>
+        <servlet-name>SearchCourseByOptionController</servlet-name>
+        <servlet-class>Controller.SearchCourseByOptionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCourseToCartController</servlet-name>
+        <servlet-class>Controller.AddCourseToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailAndRegisterCourseController</servlet-name>
+        <servlet-class>Controller.DetailAndRegisterCourseController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisCourseController</servlet-name>
+        <servlet-class>Controller.RegisCourseController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteAccountController</servlet-name>
-        <url-pattern>/DeleteAccountController</url-pattern>
+        <servlet-name>UpdateBirdFormController</servlet-name>
+        <url-pattern>/UpdateBirdFormController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoadMyBlogController</servlet-name>
-        <url-pattern>/LoadMyBlogController</url-pattern>
+        <servlet-name>ListCourseUserController</servlet-name>
+        <url-pattern>/ListCourseUserController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BanAccountController</servlet-name>
-        <url-pattern>/BanAccountController</url-pattern>
+        <servlet-name>SearchCourseByOptionController</servlet-name>
+        <url-pattern>/SearchCourseByOptionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCourseToCartController</servlet-name>
+        <url-pattern>/AddCourseToCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailAndRegisterCourseController</servlet-name>
+        <url-pattern>/DetailAndRegisterCourseController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisCourseController</servlet-name>
+        <url-pattern>/RegisCourseController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            300
         </session-timeout>
     </session-config>
     <welcome-file-list>

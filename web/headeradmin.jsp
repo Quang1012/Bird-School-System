@@ -30,8 +30,6 @@
         <link href="CSS/animate.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/slicknav.css" rel="stylesheet" type="text/css"/>
         <link href="CSS/style_1.css" rel="stylesheet" type="text/css"/>
-<!--        <link rel="stylesheet" href="CSS/adminHeader.css.css">
-        <link rel="stylesheet" href="CSS/adminHeader.css.css">-->
     </head>
 
     <body>
@@ -87,13 +85,12 @@
                                         <li><a href="MainController?action=MANAGE_COURSE">Course</a>                                        </li>
                                         <li><a href="MainController?action=MANAGE_BLOG">BLOG</a></li>
                                         <li><a href="MainController?action=LOAD_FEEDBACK">Feedback</a></li>
-                                        <li><a href="">Welcome ${sessionScope.acc.getName()}</a>
+                                        <li><a href="#">Welcome ${sessionScope.acc.getName()}</a>
                                             <ul class="submenu">
-                                                <li><a href="MainController?action=ProfileLoad">Setting Account</a></li>
+                                                <li><a href="MainController?action=ProfileLoad&acc=${sessionScope.acc.getAccountID()}">Setting Account</a></li>
                                                 <li><a href="MainController?action=Logout">Logout</a></li>
                                             </ul>
-                                        </li>
-                                        
+                                        </li>                                        
                                     </ul>
                                 </nav>
                             </div>
@@ -106,7 +103,5 @@
             </div>
         </div>
     </header>
-
-
     </body>
 </html>

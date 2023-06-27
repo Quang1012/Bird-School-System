@@ -44,12 +44,23 @@ public class CourseDTO {
         this.CourseStatus = CourseStatus;
     }
 
+
     public CourseDTO(int courseID, String courseName, String fee, String timeOfCourse, int courseStatus) {
         this.CourseID = courseID;
         this.CourseName = courseName;
         this.fee = fee;
         this.timeOfCourse = timeOfCourse;
         this.CourseStatus = courseStatus;
+    }
+
+    public CourseDTO(int courseID,String coursename, int categoriesID, String description, String fee, String image, String timeofcourse) {
+        this.CourseID = courseID;
+        this.CourseName = coursename;
+        this.categoriesID = categoriesID;
+        this.description = description;
+        this.fee = fee;
+        this.image = image;
+        this.timeOfCourse = timeofcourse;
     }
 
     public String getTimeOfCourse() {

@@ -12,7 +12,6 @@ public class BirdDTO implements Serializable {
     private String height;
     private String weight;
     private String color;
-    private int categoriesID;
     private String dentification;
     private int birdStatus;
 
@@ -36,15 +35,6 @@ public class BirdDTO implements Serializable {
         this.birdStatus = birdStatus;
     }
 
-    public BirdDTO(String birdName, String height, String weight, String color, String dentification, int birdStatus, String birdPhoto) {
-        this.birdName = birdName;
-        this.height = height;
-        this.weight = weight;
-        this.color = color;
-        this.dentification = dentification;
-        this.birdStatus = birdStatus;
-        this.birdPhoto = birdPhoto;
-    }
 
     public BirdDTO(String birdName, String height, String weight, String color, int birdStatus, String birdPhoto) {
         this.birdName = birdName;
@@ -61,6 +51,23 @@ public class BirdDTO implements Serializable {
         this.height = height;
         this.weight = weight;
         this.color = color;
+    }
+
+    public BirdDTO(int birdID, AccountDTO acc, BirdCategoryDTO birdCate, String birdName, String height, String weight, String color, String dentification, int birdStatus, String birdPhoto) {
+        this.birdID = birdID;
+        this.account = acc;
+        this.birdCategory = birdCate;
+        this.birdName = birdName;
+        this.height = height;
+        this.weight = weight;
+        this.color = color;
+        this.dentification = dentification;
+        this.birdStatus = birdStatus;
+        this.birdPhoto = birdPhoto;
+    }
+
+    public BirdDTO(String birdName) {
+        this.birdName = birdName;
     }
 
     public int getBirdID() {
@@ -126,15 +133,6 @@ public class BirdDTO implements Serializable {
     public void setColor(String color) {
         this.color = color;
     }
-
-    public int getCategoriesID() {
-        return categoriesID;
-    }
-
-    public void setCategoriesID(int categoriesID) {
-        this.categoriesID = categoriesID;
-    }
-
     public String getDentification() {
         return dentification;
     }

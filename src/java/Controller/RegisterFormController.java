@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,12 +25,12 @@ public class RegisterFormController extends HttpServlet {
             HttpSession s = request.getSession();
             RegistrationFormDAO r = new RegistrationFormDAO();
             try {
-                int CourseID = Integer.valueOf(request.getParameter("tID"));
+                int courseID = Integer.valueOf(request.getParameter("CID"));
                 int accountID = Integer.valueOf(request.getParameter("aID"));
-                RegistrationFormDTO tour_detail = r.getDetailCourse(CourseID);
+                RegistrationFormDTO course_detail = r.getDetailCourse(courseID);
                 List<RegistrationFormDTO> bird_detail = r.listBirdByAccountID(accountID, 1);
-                if (tour_detail != null && bird_detail != null) {
-                    s.setAttribute("DETAIL_TOUR", tour_detail);
+                if (course_detail != null && bird_detail != null) {
+                    s.setAttribute("DETAIL_COUR", course_detail);
                     s.setAttribute("DETAIL_BIRD", bird_detail);
                     url = SUCCESS;
                 } else {

@@ -1,9 +1,7 @@
 package Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,17 +19,15 @@ public class MainController extends HttpServlet {
     private static final String REGISTER = "Register";
     private static final String LOGOUT = "Logout";
     private static final String REGISTER_FORM = "RegisterForm";
-    private static final String CONFIRM_FORM = "ConfirmForm";
     private static final String LOAD_BIRD = "BIRD";
     private static final String HOME_USER = "HOME_USER";
     private static final String HOME_GUEST = "HOME_GUEST";
     private static final String LOAD_BIRD_BY_ID = "LoadBirdByAccountID";
-    private static final String FINAL_FORM = "FinalForm";
     private static final String UPDATE = "UPDATE";
     private static final String LOAD_ACCOUNT = "ProfileLoad";
     private static final String ADD_BIRD = "addBird";
     private static final String GET_BIRD_UPDATE_USER = "getBirdUpdate";
-    private static final String UPDATE_BIRD = "updateBird";
+    private static final String UPDATE_BIRD_PAGE = "UPDATE_BIRD_PAGE";
     private static final String LOAD_BLOG = "BLOG";
     private static final String LOAD_BLOG_DETAIL = "BlogDetail";
     private static final String SUBMIT_FEEDBACK = "Submit Feedback";
@@ -41,23 +37,22 @@ public class MainController extends HttpServlet {
     private static final String LISTALLACCOUNT = "LISTALLACCOUNT";
     private static final String ABOUT_US = "ABOUT_US";
     private static final String USER_BLOG = "USER_BLOG";
-
+    private static final String LIST_COURSE_FOR_USER = "LIST_COURSE_FOR_USER";
+    private static final String ENROLL_COURSE = "ENROLL_COURSE";
+    private static final String SUBMIT_REGIS_FORM = "SUBMIT_REGIS_FORM";
+    
     //value of action of Admin
     private static final String MANAGE_ACCOUNT = "MANAGE_ACCOUNT";
     private static final String MANAGE_BIRD = "MANAGE_BIRD";
     private static final String LOAD_BIRD_CATEGORY = "LOAD_BIRD_CATEGORY";
+    private static final String SEARCHBIRD = "SEARCHBIRD";
 
-    private static final String MANAGE_PARTICIPANT = "MANAGE_PARTICIPANT";
-
-    private static final String LOAD_PARTICIPANT = "LOAD_PARTICIPANT";
-    private static final String DENY_PARTICIPANT = "DENY_PARTICIPANT";
-    private static final String APPROVE_PARTICIPANT = "APPROVE_PARTICIPANT";
     private static final String LOAD_FORM_DETAIL = "LOAD_FORM_DETAIL";
     private static final String LOAD_BLOGS_MANGEMENT = "MANAGE_BLOG";
     private static final String DELETE_BLOGS = "DELETE_BLOGS";
     private static final String ADD_BLOGS = "AddNewBlog";
     private static final String UPDATE_BLOGS = "UPDATE_BLOGS";
-    private static final String UPDATE_ACCOUNT = "UPDATE_ACCOUNT";
+    private static final String UPDATE_ACCOUNT = "Update_Account";
     private static final String DELETE_ACCOUNT = "DELETE_ACCOUNT";
     private static final String LOAD_FEEDBACK = "LOAD_FEEDBACK";
     private static final String DASHBOARD = "DASHBOARD";
@@ -65,6 +60,9 @@ public class MainController extends HttpServlet {
     private static final String MANAGE_COURSE = "MANAGE_COURSE";
     private static final String LIST_COURSE = "LIST_COURSE";
     private static final String UPDATE_COURSE = "UPDATE_COURSE";
+    private static final String BIRD_DETAIL = "BIRD_DETAIL";
+    private static final String ACCOUNT_DETAIL = "Detail";
+    private static final String UPDATE_BIRD = "UPDATE_BIRD";
 
     //link to servlet of User
     private static final String LOAD_HOME_PAGE = "LoadHomePageController";
@@ -72,10 +70,7 @@ public class MainController extends HttpServlet {
     private static final String REGISTER_CONTROLLER = "RegisterController";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
     private static final String REGISTER_FORM_CONTROLLER = "RegisterFormController";
-    private static final String CONFIRM_FORM_CONTROLLER = "ConfirmFormController";
-    private static final String FINAL_FORM_CONTROLLER = "FinalConfirmFormController";
     private static final String LOAD_ACCOUNT_DETAIL_CONTROLLER = "LoadProfileController";
-    private static final String UPDATE_ACCOUNT_CONTROLLER = "UpdateAccountController";
     private static final String DELETE_ACCOUNT_CONTROLLER = "DeleteAccountController";
     private static final String ADD_BIRD_CONTROLLER = "AddBirdController";
     private static final String GET_BIRD_UPDATE_CONTROLLER = "LoadBirdUpdateController";
@@ -87,6 +82,11 @@ public class MainController extends HttpServlet {
     private static final String RESET_FORGOT_PASSWORD = "ResetPasswordController";
     private static final String LOAD_MY_BLOG = "LoadMyBlogController";
     private static final String LIST_COURSE_CONTROLLER = "ListCourseController";
+    private static final String LIST_COURSE_USER = "ListCourseUserController";
+    private static final String SEARCH_COURSE = "SEARCH_COURSE";
+    private static final String ADD_TO_CART = "AddCourseToCartController";
+    private static final String DETAIL_AND_REGISCOURSE = "DetailAndRegisterCourseController";
+    private static final String REGIS_COURSE_CONTROLLER = "RegisCourseController";
 
     // link to servlet of Admin
     private static final String COUNT_ACCOUNT = "COUNT_ACCOUNT";
@@ -95,15 +95,17 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_ACCOUNT_BY_OPTION = "SearchAccountController";
     private static final String COUNT_ACCOUNT_CONTROLLER = "CountAccountController";
     private static final String LOAD_BIRD_CONTROLLER = "LoadBirdController";
+    private static final String LOAD_UPDATE_BIRD_CONTROLLER = "LoadBirdUpdateController";
     private static final String UPDATE_ACCOUNT_ALL_ROLE = "UpdateAccountController";
     private static final String BAN_ACCOUNT_CONTROLLER = "BanAccountController";
     private static final String UPDATE_COURSE_CONTROLLER = "AdminUpdateCourseController";
+    private static final String BIRD_DETAIL_CONTROLLER = "BirdDetailController";
+    private static final String ACCOUNT_DETAIL_CONTROLLER = "AccountDetailController";
+    private static final String SEARCH_BIRD_CONTROLLER = "SearchBirdController";
+    private static final String SEARCH_COURSE_BY_OPTION = "SearchCourseByOptionController";
 
     private static final String LOAD_BIRD_CATEGORY_CONTROLLER = "LoadBirdCategoryController";
-
-    private static final String MANAGE_PARTICIPANT_CONTROLLER = "ManageParticipantController";
     private static final String LOAD_FORM_DETAIL_CONTROLLER = "LoadFormDetailController";
-    private static final String LOAD_PARTICIPANT_CONTROLLER = "LoadParticipantController";
     private static final String LOAD_BLOGS_MANGEMENT_CONTROLLER = "LoadBlogControllerManageController";
     private static final String DELETE_BLOGS_CONTROLLER = "DeleteBlogsController";
     private static final String ADD_BLOGS_CONTROLLER = "AddBlogsController";
@@ -149,20 +151,18 @@ public class MainController extends HttpServlet {
                     case ABOUT_US:
                         url = ABOUT_US_PAGE;
                         break;
-
                     case REGISTER_FORM:
                         url = REGISTER_FORM_CONTROLLER;
-                        break;
-                    case CONFIRM_FORM:
-                        url = CONFIRM_FORM_CONTROLLER;
                         break;
                     case LOAD_BIRD:
                         url = LOAD_BIRD_BY_ID;
                         break;
-                    case FINAL_FORM:
-                        url = FINAL_FORM_CONTROLLER;
+                    case SEARCHBIRD:
+                        url = SEARCH_BIRD_CONTROLLER;
                         break;
-
+                    case SUBMIT_REGIS_FORM:
+                        url= REGIS_COURSE_CONTROLLER;
+                        break;
                     //function of ManageAccount
                     case COUNT_ACCOUNT:
                         url = COUNT_ACCOUNT_CONTROLLER;
@@ -180,21 +180,31 @@ public class MainController extends HttpServlet {
                         url = DELETE_ACCOUNT_CONTROLLER;
                         break;
                     case BAN_ACCOUNT:
-                        url =BAN_ACCOUNT_CONTROLLER ;
+                        url = BAN_ACCOUNT_CONTROLLER;
                         break;
                     case LOAD_ACCOUNT:
                         url = LOAD_ACCOUNT_DETAIL_CONTROLLER;
                         break;
-                        
-                        
+                    case ACCOUNT_DETAIL:
+                        url = ACCOUNT_DETAIL_CONTROLLER;
+                        break;
+
+                    case SEARCH_COURSE:
+                        url = SEARCH_COURSE_BY_OPTION;
+                        break;
                     case LIST_COURSE:
                         url = LIST_COURSE_CONTROLLER;
                         break;
                     case UPDATE_COURSE:
                         url = UPDATE_COURSE_CONTROLLER;
                         break;
-                        
-                        
+                    case LIST_COURSE_FOR_USER:
+                        url = LIST_COURSE_USER;
+                        break;
+                    case ENROLL_COURSE:
+                        url = DETAIL_AND_REGISCOURSE;
+                        break;
+
                     case MANAGE_BIRD:
                         url = LOAD_BIRD_CONTROLLER;
                         break;
@@ -207,23 +217,16 @@ public class MainController extends HttpServlet {
                     case GET_BIRD_UPDATE_USER:
                         url = GET_BIRD_UPDATE_CONTROLLER;
                         break;
+                    case UPDATE_BIRD_PAGE:
+                        url = LOAD_UPDATE_BIRD_CONTROLLER;
+                        break;
+                    case BIRD_DETAIL:
+                        url = BIRD_DETAIL_CONTROLLER;
+                        break;
                     case UPDATE_BIRD:
                         url = UPDATE_BIRD_CONTROLLER;
                         break;
 
-                    case MANAGE_PARTICIPANT:
-                        url = MANAGE_PARTICIPANT_CONTROLLER;
-                        break;
-
-                    case LOAD_PARTICIPANT:
-                        url = LOAD_PARTICIPANT_CONTROLLER;
-                        break;
-                    case DENY_PARTICIPANT:
-                        url = MANAGE_PARTICIPANT_CONTROLLER;
-                        break;
-                    case APPROVE_PARTICIPANT:
-                        url = MANAGE_PARTICIPANT_CONTROLLER;
-                        break;
                     case LOAD_BLOG:
                         url = LOAD_BLOG_CONTROLLER;
                         break;
@@ -245,24 +248,24 @@ public class MainController extends HttpServlet {
                     case UPDATE:
                         url = UPDATE_BLOGS_CONTROLLER;
                         break;
-                        
                     case USER_BLOG:
                         url = LOAD_MY_BLOG;
                         break;
-                        
+
                     case SUBMIT_FEEDBACK:
                         url = SUBMIT_FEEDBACK_CONTROLLER;
                         break;
                     case LOAD_FEEDBACK:
                         url = LOAD_FEEDBACK_CONTROLLER;
                         break;
-
                     case LOAD_FORM_DETAIL:
                         url = LOAD_FORM_DETAIL_CONTROLLER;
                         break;
+
                     case DASHBOARD:
                         url = LOAD_DASHBOARD_CONTROLLER;
                         break;
+
                     case PASSWORD_FORGOT_SEARCH:
                         url = LOAD_PASSWORD_FORGOT_CONTROLLER;
                         break;

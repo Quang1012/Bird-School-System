@@ -1,0 +1,237 @@
+
+img{
+    width: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    background-color: transparent;
+    transition: 0.3s;
+}
+header{
+    height: 100px;
+    justify-content: space-between;
+    display: flex;
+}
+.header-logo{
+    max-width: 140px;
+    padding-bottom: 20px;
+}
+.header-inner{
+    width: 88%;
+    padding: 5px 0;
+}
+.header-inner-contact{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #c00000;
+}
+.inner-contact a:hover{
+    color: #c00000;
+}
+.inner-contact span{
+    padding: 0 5px;
+}
+.inner-contact-search{
+    position: relative;
+}
+.search-item{
+    padding: 5px;
+    width: 300px;
+    height: 30px;
+    border: 1px solid #c00000;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.inner-contact-search .search{
+    position: absolute;
+    background-color: transparent;
+    right: 1px;
+}
+/* menu + member */
+.menu-links{
+    display: flex;
+}
+.menu-link{
+    padding: 5px 20px 5px 10px;
+    text-transform: uppercase;
+    font-weight:500;
+    font-size: 20px;
+    font-family: 'Saira Condensed', sans-serif;
+    border-bottom: 2px solid #c00000;
+}
+.menu-link:hover a{
+    color: #c00000;
+}
+/* <!-- information --> */
+.header-inner-container{
+    display: flex;
+    justify-content: space-between;
+}
+.header-inner-menu{
+    order: 2;
+}
+.header-inner-information{
+    order: 1;
+}
+.information-name{
+    padding: 5px 0;
+}
+.name{
+    font-size: 22px;
+}
+.information-item{
+    display: flex;
+    padding-bottom: 10px;
+    align-items: center;
+    border-bottom: 2px solid #c00000;
+}
+.information-item::before{
+    content: "";
+    position: absolute;
+    top: 112px;
+    left: 30px;
+    width: 180px;
+    border-bottom: 2px solid #C00000;
+}
+.item-i{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    font-weight: 300;
+}
+.icon{
+    margin-right: 5px;
+}
+/* Content */
+.content{
+    display: flex;
+    margin-top: 70px;
+}
+.content-information{
+    display: flex;
+    width: 50%;
+}
+.content-information-img{
+    max-width: 350px;
+    flex-grow: 1;
+}
+.information-content .XemThem {
+    color: #858585;
+}
+.information-content .XemThem:hover {
+    color: #C00000;
+}
+.content-information-img img {
+    border-radius: 20px;
+}
+.img-title{
+    display: block;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Saira Condensed', sans-serif;
+    text-align: center;
+    color: #C00000;
+}
+.content-information-content{
+    max-width: 300px;
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: justify;
+    font-weight: 300;
+    font-size: 20px; 
+    line-height: 25px;   
+}
+.information-author{
+    margin-top: 10px;
+}
+.info{
+    display: flex;
+
+}
+.info-title{
+    margin-top: 10px;
+    width: 150px;
+}
+.info-name{
+    margin-top: 10px;
+    text-align: left;
+}
+/* <!-- location --> */
+.content-location{
+    width: 50%;
+    margin-left: 50px;
+    position: relative;
+}
+.content-location-title h3{
+    position: absolute;
+    left: 50%;
+    top:-10%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: #C00000;
+}
+.form-submit{
+    display: flex;
+    align-items: center;
+}
+.form-submit .form-submit-right{
+    margin-left: 20px;
+}
+.form-submit .form-title{
+    font-style: italic;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+.form-submit .form-title-1{
+    width: 300px;
+    padding: 15px;
+    border: 1px solid #C00000;
+    border-radius: 5px;
+}
+.Luuy{
+    color: #C00000;
+    font-size: 11px;
+    font-style: italic;
+    margin-top: 10px;
+}
+.Button{
+    display: flex;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    background-color: #4e4747;
+    padding: 10px;
+    border: 5px #c00000;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+    cursor: pointer;
+}/*
+.btn:hover{
+    background-color: #000000;
+}
+.btn:active{
+    background-color: #c00000;
+}*/
+
+/*.icon,.text,.material-symbols-outlined{
+    background-color: transparent;
+}*/
