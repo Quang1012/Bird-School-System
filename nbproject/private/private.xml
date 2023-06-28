@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/src/java/Controller/FollowBird.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/src/java/bird/BirdDAO.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/web/event-yoga-1.jsp</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/src/java/Schedule/ScheduleDAO.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/src/java/birdcategories/BirdCategoriesDAO.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/web/index.jsp</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/web/schedule.jsp</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/web/event-restorative-yoga.jsp</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/web/event-rowing-workout.jsp</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/src/java/Controller/ScheduleController.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/src/java/Schedule/ScheduleDTO.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Documents/GitHub/ROTMONSWP/src/java/achievement/AchievementDTO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
