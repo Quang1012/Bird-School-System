@@ -28,6 +28,18 @@
         <servlet-name>RegisCourseController</servlet-name>
         <servlet-class>Controller.RegisCourseController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportPageController</servlet-name>
+        <servlet-class>Controller.ReportPageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendReportController</servlet-name>
+        <servlet-class>Controller.SendReportController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewReportController</servlet-name>
+        <servlet-class>Controller.ViewReportController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>RegisCourseController</servlet-name>
         <url-pattern>/RegisCourseController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportPageController</servlet-name>
+        <url-pattern>/ReportPageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendReportController</servlet-name>
+        <url-pattern>/SendReportController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReportController</servlet-name>
+        <url-pattern>/ViewReportController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

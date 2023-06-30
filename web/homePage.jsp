@@ -25,7 +25,7 @@
 <body>
     <header>
         <c:choose>
-            <c:when test="${sessionScope.acc.role == 0}">
+            <c:when test="${sessionScope.acc.role == 0 || sessionScope.acc.role == 4}">
                 <jsp:include page="headeruser.jsp" ></jsp:include>
             </c:when>
             <c:when test="${sessionScope.acc.role == 1}">

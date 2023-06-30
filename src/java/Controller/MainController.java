@@ -40,6 +40,8 @@ public class MainController extends HttpServlet {
     private static final String LIST_COURSE_FOR_USER = "LIST_COURSE_FOR_USER";
     private static final String ENROLL_COURSE = "ENROLL_COURSE";
     private static final String SUBMIT_REGIS_FORM = "SUBMIT_REGIS_FORM";
+    private static final String SEND_REPORT = "SEND_REPORT";
+    private static final String VIEW_REPORT_PAGE = "VIEW_REPORT_PAGE";
     
     //value of action of Admin
     private static final String MANAGE_ACCOUNT = "MANAGE_ACCOUNT";
@@ -63,6 +65,7 @@ public class MainController extends HttpServlet {
     private static final String BIRD_DETAIL = "BIRD_DETAIL";
     private static final String ACCOUNT_DETAIL = "Detail";
     private static final String UPDATE_BIRD = "UPDATE_BIRD";
+    private static final String REPORT_PAGE = "REPORT_PAGE";
 
     //link to servlet of User
     private static final String LOAD_HOME_PAGE = "LoadHomePageController";
@@ -87,7 +90,9 @@ public class MainController extends HttpServlet {
     private static final String ADD_TO_CART = "AddCourseToCartController";
     private static final String DETAIL_AND_REGISCOURSE = "DetailAndRegisterCourseController";
     private static final String REGIS_COURSE_CONTROLLER = "RegisCourseController";
-
+    private static final String REPORT_PAGE_CONTROLLER = "ReportPageController";
+    private static final String VIEW_REPORT_CONTROLLER = "ViewReportController";
+    
     // link to servlet of Admin
     private static final String COUNT_ACCOUNT = "COUNT_ACCOUNT";
     private static final String LIST_ALL_ACCOUNT = "ListAllAccountController";
@@ -103,6 +108,7 @@ public class MainController extends HttpServlet {
     private static final String ACCOUNT_DETAIL_CONTROLLER = "AccountDetailController";
     private static final String SEARCH_BIRD_CONTROLLER = "SearchBirdController";
     private static final String SEARCH_COURSE_BY_OPTION = "SearchCourseByOptionController";
+    private static final String SEND_REPORT_CONTROLLER = "SendReportController";
 
     private static final String LOAD_BIRD_CATEGORY_CONTROLLER = "LoadBirdCategoryController";
     private static final String LOAD_FORM_DETAIL_CONTROLLER = "LoadFormDetailController";
@@ -271,6 +277,15 @@ public class MainController extends HttpServlet {
                         break;
                     case PASSWORD_RESET:
                         url = RESET_FORGOT_PASSWORD;
+                        break;
+                    case REPORT_PAGE:
+                        url= REPORT_PAGE_CONTROLLER;
+                        break;
+                    case SEND_REPORT:
+                        url = SEND_REPORT_CONTROLLER;
+                        break;
+                    case VIEW_REPORT_PAGE:
+                        url = VIEW_REPORT_CONTROLLER;
                         break;
                 }
             }

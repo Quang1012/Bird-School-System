@@ -5,11 +5,15 @@
 package Controller;
 
 import DAO.AccountDAO;
+import DAO.ReportDAO;
 import DTO.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-@WebServlet(name = "ListAllAccountController", urlPatterns = {"/ListAllAccountController"})
-public class ListAllAccountController extends HttpServlet {
+@WebServlet(name = "SendReportController", urlPatterns = {"/SendReportController"})
+public class SendReportController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,16 +40,28 @@ public class ListAllAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            List<AccountDTO> accList = AccountDAO.getAllAccount();
-            if(accList != null && !accList.isEmpty()){
-                request.setAttribute("allAcc", accList);
+            int birdID = Integer.parseInt(request.getParameter("birdID"));
+            int coachaccID = Integer.parseInt(request.getParameter("coachAccID"));
+            String image = request.getParameter("image");
+            String videoUrl = request.getParameter("video");
+            AccountDAO accDao = new AccountDAO();
+            AccountDTO acc = accDao.getAccountByBird(birdID);
+            int accID = acc.getAccountID();
+            ReportDAO rp = new ReportDAO();
+            LocalDate localDate = LocalDate.now();
+            Date date = java.sql.Date.valueOf(localDate);
+            String mess ="";
+            String url = "";
+            boolean check = rp.insertReport(accID, birdID, date, image, videoUrl, 1);
+            if(check){
+                mess = "Send successfull";
             }else{
-                request.setAttribute("mess1", "List null");
+                mess = "Send fail.";
             }
-            request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
+            url = "MainController?action=REPORT_PAGE&accID=" + coachaccID;
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
-            System.out.println("Error at ListAllAccountController: " + ex.getMessage());
+            Logger.getLogger(SendReportController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

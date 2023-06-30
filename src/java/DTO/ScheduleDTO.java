@@ -6,8 +6,6 @@ package DTO;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 
 /**
  *
@@ -15,61 +13,38 @@ import java.time.LocalDate;
  */
 public class ScheduleDTO implements Serializable {
 
-    private int birdId;
+    private BirdDTO bird;
     private java.sql.Date date;
     private int slot;
     private int coachId;
-    private int classId;
-    private String coachName;
-    // Constructors, getters, and setters
-    private BirdDTO birdName ;
-    public ScheduleDTO(int birdId, java.sql.Date date, int slot, int coachId, String coachName, int classId,BirdDTO birdName ) {
-        this.birdId = birdId;
-        this.date = date;
-        this.slot = slot;
-        this.coachId = coachId;
-        this.classId = classId;
-        this.coachName = coachName;
-        this.birdName =birdName;
-    }
-
-    public ScheduleDTO(int birdId, Date date, int slot, int coachId, int classId, String coachName, BirdDTO birdName) {
-        this.birdId = birdId;
-        this.date = date;
-        this.slot = slot;
-        this.coachId = coachId;
-        this.classId = classId;
-        this.coachName = coachName;
-        this.birdName = birdName;
-    }
-
-    public BirdDTO getBirdName() {
-        return birdName;
-    }
-
-    public void setBirdName(BirdDTO birdName) {
-        this.birdName = birdName;
-    }
-
-  
+    private AccountDTO acc;
+    private ClassDTO classs;
 
     public ScheduleDTO() {
     }
 
-    public String getCoachName() {
-        return coachName;
+    public ScheduleDTO(BirdDTO bird, Date date, int slot, int coachId, ClassDTO classs) {
+        this.bird = bird;
+        this.date = date;
+        this.slot = slot;
+        this.coachId = coachId;
+        this.classs = classs;
     }
 
-    public void setCoachName(String coachName) {
-        this.coachName = coachName;
+    public ScheduleDTO(BirdDTO bird, AccountDTO acc, Date date, int slot, ClassDTO classs) {
+         this.bird = bird;
+         this.acc = acc;
+         this.date = date;
+         this.slot = slot;
+         this.classs = classs;
     }
 
-    public int getBirdId() {
-        return birdId;
+    public BirdDTO getBird() {
+        return bird;
     }
 
-    public void setBirdId(int birdId) {
-        this.birdId = birdId;
+    public void setBird(BirdDTO bird) {
+        this.bird = bird;
     }
 
     public Date getDate() {
@@ -78,11 +53,6 @@ public class ScheduleDTO implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "ScheduleDTO [birdId=" + birdId + ", date=" + date + ", slot=" + slot + ", coachId=" + coachId + ", classId=" + classId + "]";
     }
 
     public int getSlot() {
@@ -101,12 +71,23 @@ public class ScheduleDTO implements Serializable {
         this.coachId = coachId;
     }
 
-    public int getClassId() {
-        return classId;
+    public ClassDTO getClasss() {
+        return classs;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setClasss(ClassDTO classs) {
+        this.classs = classs;
     }
+
+    public AccountDTO getAcc() {
+        return acc;
+    }
+
+    public void setAcc(AccountDTO acc) {
+        this.acc = acc;
+    }
+    
+    
+    
 
 }

@@ -4,7 +4,6 @@
  */
 package DTO;
 
-import java.sql.Date;
 
 /**
  *
@@ -61,6 +60,16 @@ public class CourseDTO {
         this.fee = fee;
         this.image = image;
         this.timeOfCourse = timeofcourse;
+    }
+
+    public CourseDTO(int courseID, String description, String fee, int courseStatus, String image, String courseName, String dateTime) {
+        this.CourseID = courseID;
+        this.description = description;
+        this.fee = fee;
+        this.CourseStatus = courseStatus;
+        this.image = image;
+        this.CourseName = courseName;
+        this.timeOfCourse = dateTime;
     }
 
     public String getTimeOfCourse() {

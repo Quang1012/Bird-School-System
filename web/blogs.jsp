@@ -18,7 +18,7 @@
         <!--header section-->
         <header>
             <c:choose>
-                <c:when test="${sessionScope.acc.role == 0}">
+                <c:when test="${sessionScope.acc.role == 0 || sessionScope.acc.role == 4}">
                     <%@include file="headeruser.jsp" %>
                 </c:when>
                 <c:otherwise>

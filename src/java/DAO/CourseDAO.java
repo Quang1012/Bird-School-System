@@ -18,11 +18,56 @@ import utils.DBContext;
  * @author Dell
  */
 public class CourseDAO {
+    private final static String LIST_course = "SELECT  t.courseID, t.description, t.fee, t.courseStatus, t.image, t.coursename,t.timeofcourse\n"
+            + "FROM tblCourse t\n"
+            + "ORDER BY t.courseID";
+    private final static String DASHBOARD = "SELECT COUNT(courseID) as courseID\n"
+            + "FROM tblCourse";
+    private final static String COUNT_ONGOING_DASHBOARD = "SELECT COUNT(courseID) as courseID FROM tblCourse WHERE courseStatus = 1 OR  courseStatus = 2 OR courseStatus = 3";
+    private final static String COUNT_FINISED_DASHBOARD = "SELECT COUNT(courseID) as courseID FROM tblCourse WHERE courseStatus = 4";
+    private final static String COUNT_DELAY_DASHBOARD = "SELECT COUNT(courseID) as courseID FROM tblCourse WHERE courseStatus = 5";
 
-    private List<CourseDTO> listCourses;
+    private List<CourseDTO> listCourses;    
 
     public List<CourseDTO> getListCourses() {
         return listCourses;
+    }
+    public List<CourseDTO> listcourse() throws Exception {
+        List<CourseDTO> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement(LIST_course);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int courseID = rs.getInt("courseID");
+                    String description = rs.getString("description");
+                    String fee = rs.getString("fee");
+                    int courseStatus = rs.getInt("courseStatus");
+                    String image = rs.getString("image");
+                    String courseName = rs.getString("coursename");
+                    String dateTime = rs.getString("timeofcourse");
+                    CourseDTO t = new CourseDTO(courseID, description, fee, courseStatus, image, courseName, dateTime);
+                    list.add(t);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
     }
 
     public void listCourse() throws SQLException {
@@ -241,5 +286,125 @@ public class CourseDAO {
             }
         }
         return null;
+    }
+    
+    public int countcourseOnGoing() throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement(COUNT_ONGOING_DASHBOARD);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("courseID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return count;
+    }
+
+    public int countcourse() throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement(DASHBOARD);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("courseID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return count;
+    }
+    
+    public int countcourseFinised() throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement(COUNT_FINISED_DASHBOARD);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("courseID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return count;
+    }
+    
+    public int countcourseDelay() throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            con = DBContext.getConnection();
+            if (con != null) {
+                stm = con.prepareStatement(COUNT_DELAY_DASHBOARD);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("courseID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return count;
     }
 }

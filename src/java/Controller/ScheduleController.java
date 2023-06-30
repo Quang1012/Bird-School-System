@@ -23,21 +23,21 @@ public class ScheduleController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession s = request.getSession();
-            ScheduleDAO b = new ScheduleDAO();
-            String url = null;
-            try {
-                List<ScheduleDTO> schedule = b.getSchedules();
-                if (schedule != null) {
-                    s.setAttribute("schedules", schedule);
-                    url = SUCCESS;
-                } else {
-                    url = ERROR;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            request.getRequestDispatcher(url).forward(request, response);
+//            HttpSession s = request.getSession();
+//            ScheduleDAO b = new ScheduleDAO();
+//            String url = null;
+//            try {
+//                List<ScheduleDTO> schedule = b.getSchedules();
+//                if (schedule != null) {
+//                    s.setAttribute("schedules", schedule);
+//                    url = SUCCESS;
+//                } else {
+//                    url = ERROR;
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

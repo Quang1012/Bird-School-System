@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -82,8 +83,15 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a  href="MainController?action=HOME_USER">HOME</a></li>
-                                            <li><a  href="MainController?action=MY_BIRD">BIRD</a></li>
                                             <li><a href="MainController?action=BLOG">BLOG</a></li>
+                                                <c:choose>
+                                                    <c:when test="${sessionScope.acc.getRole()== 4}">
+                                                    <li><a href="MainController?action=REPORT_PAGE&accID=${sessionScope.acc.getAccountID()}">Report</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                    <li><a href="MainController?action=VIEW_REPORT_PAGE&accID=${sessionScope.acc.getAccountID()}">View Report</a></li>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             <li><a  href="#">Course</a> <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="MainController?action=LIST_COURSE_FOR_USER">Course</a></li>

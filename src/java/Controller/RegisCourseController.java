@@ -91,8 +91,6 @@ public class RegisCourseController extends HttpServlet {
                     if (huhu) {
                         if (coachID != 1) {
                             coachdao.setCoachActive(coachID);
-                        }else{
-                            return;
                         }
                         mess = "Regis Successfull";
                     } else {

@@ -4,14 +4,15 @@
  */
 package Controller;
 
-import DAO.AccountDAO;
-import DTO.AccountDTO;
+import DAO.ReportDAO;
+import DTO.ReportDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-@WebServlet(name = "ListAllAccountController", urlPatterns = {"/ListAllAccountController"})
-public class ListAllAccountController extends HttpServlet {
+public class ViewReportController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,16 +36,19 @@ public class ListAllAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            List<AccountDTO> accList = AccountDAO.getAllAccount();
-            if(accList != null && !accList.isEmpty()){
-                request.setAttribute("allAcc", accList);
+            int accID = Integer.parseInt(request.getParameter("accID"));
+            ReportDAO rpDao = new ReportDAO();
+            List<ReportDTO> listRp = rpDao.getListReportByAccountID(accID);
+            String url ="";
+            if(listRp != null){
+                request.setAttribute("listRp", listRp);
+                url = "ViewReport.jsp";
             }else{
-                request.setAttribute("mess1", "List null");
+                url = "error.jsp";
             }
-            request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         } catch (SQLException ex) {
-            System.out.println("Error at ListAllAccountController: " + ex.getMessage());
+            Logger.getLogger(ViewReportController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
