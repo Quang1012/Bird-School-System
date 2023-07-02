@@ -44,7 +44,8 @@ public class MainController extends HttpServlet {
     private static final String PASSWORD_RESET = "resetPasswordUpdate";
     private static final String SEARCH_ACCOUNT = "SEARCH_ACCOUNT";
     private static final String LISTALLACCOUNT = "LISTALLACCOUNT";
-
+  private static final String SCHEDULE = "SCHEDULE";
+  private static final String SCHEDULE_CONTROLLER = "schedule";
     //value of action of Admin
     private static final String MANAGE_ACCOUNT = "MANAGE_ACCOUNT";
     private static final String MANAGE_BIRD = "MANAGE_BIRD";
@@ -124,6 +125,9 @@ public class MainController extends HttpServlet {
                 switch (action) {
                     case LOGIN:
                         url = LOGIN_CONTROLLER;
+                        break;
+                        case SCHEDULE:
+                        url = SCHEDULE_CONTROLLER;
                         break;
                     case REGISTER:
                         url = REGISTER_CONTROLLER;

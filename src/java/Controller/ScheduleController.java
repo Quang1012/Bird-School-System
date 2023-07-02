@@ -1,7 +1,7 @@
-    package Controller;
+package Controller;
 
-import Schedule.ScheduleDAO;
-import Schedule.ScheduleDTO;
+import DAO.ScheduleDAO;
+import DTO.ScheduleDTO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/schedule")
@@ -23,13 +21,14 @@ public class ScheduleController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession s = request.getSession();
+          //  String accountId = request.getParameter("auucountID") ;
+         String accountId = "0";
             ScheduleDAO b = new ScheduleDAO();
             String url = null;
             try {
-                List<ScheduleDTO> schedule = b.getSchedules();
+                List<ScheduleDTO> schedule = b.getSchedules(accountId);
                 if (schedule != null) {
-                    s.setAttribute("schedules", schedule);
+                    request.setAttribute("schedules", schedule);
                     url = SUCCESS;
                 } else {
                     url = ERROR;

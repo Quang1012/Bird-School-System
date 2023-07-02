@@ -4,36 +4,48 @@
  */
 package DTO;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Date;
 
 /**
  *
- * @author PC
+ * @author Admin
  */
-public class ScheduleDTO {
-    private int birdID;
-    private Date date;
+public class ScheduleDTO implements Serializable {
+
+    private int birdId;
+    private java.sql.Date date;
     private int slot;
-    private int coachID;
-    private int classID;
+    private int coachId;
+    private int classId;
+    private String birdName;
+
+    public ScheduleDTO(int birdId, java.sql.Date date, int slot, int coachId, int classId, String birdName) {
+        this.birdId = birdId;
+        this.date = date;
+        this.slot = slot;
+        this.coachId = coachId;
+        this.classId = classId;
+        this.birdName = birdName;
+    }
+
+    public String getBirdName() {
+        return birdName;
+    }
+
+    public void setBirdName(String birdName) {
+        this.birdName = birdName;
+    }
 
     public ScheduleDTO() {
     }
 
-    public ScheduleDTO(int birdID, Date date, int slot, int coachID, int classID) {
-        this.birdID = birdID;
-        this.date = date;
-        this.slot = slot;
-        this.coachID = coachID;
-        this.classID = classID;
+    public int getBirdId() {
+        return birdId;
     }
 
-    public int getBirdID() {
-        return birdID;
-    }
-
-    public void setBirdID(int birdID) {
-        this.birdID = birdID;
+    public void setBirdId(int birdId) {
+        this.birdId = birdId;
     }
 
     public Date getDate() {
@@ -44,6 +56,11 @@ public class ScheduleDTO {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "ScheduleDTO [birdId=" + birdId + ", date=" + date + ", slot=" + slot + ", coachId=" + coachId + ", classId=" + classId + "]";
+    }
+
     public int getSlot() {
         return slot;
     }
@@ -52,21 +69,19 @@ public class ScheduleDTO {
         this.slot = slot;
     }
 
-    public int getCoachID() {
-        return coachID;
+    public int getCoachId() {
+        return coachId;
     }
 
-    public void setCoachID(int coachID) {
-        this.coachID = coachID;
+    public void setCoachId(int coachId) {
+        this.coachId = coachId;
     }
 
-    public int getClassID() {
-        return classID;
+    public int getClassId() {
+        return classId;
     }
 
-    public void setClassID(int classID) {
-        this.classID = classID;
+    public void setClassId(int classId) {
+        this.classId = classId;
     }
-    
-    
 }
