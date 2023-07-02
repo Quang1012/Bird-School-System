@@ -4,18 +4,21 @@
     <div>
 
         <c:forEach var="bird" items="${birdList}">
+               
 
+                <c:if test="${bird.getClassID() == 9}">
+            
             <div>
-                <img style="width: 350px" src="${bird.birdPhoto}">
-                <li>Name : ${bird.getBirdName()}</li>
-                <li> Weight :${bird.getWeight()}</li>
-                <li> Height :${bird.getHeight()}</li>
-                <li> Color  :${bird.getColor()}</li>
-              
+                
+                <li> CoureID : ${bird.getCourseID()}</li>
+                <li> ClassID :${bird.getClassID()}</li>
+                
+                <li> TypeeofClass  :${bird.getTypeofclass()}</li>
+               <li> Address  : ${bird.getAddress()}</li>
             </div>
 
-
-        </c:forEach>   
-
+</c:if>
+        
+ </c:forEach>   
     </div>
 </div>
